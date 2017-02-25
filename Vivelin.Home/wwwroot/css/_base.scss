@@ -1,0 +1,31 @@
+﻿$accentPrimary: #ea005e;
+$accentSecondary: #8fc045;
+
+@import 'typography';
+
+body {
+    margin: 1em;
+}
+
+header, main, footer {
+    margin: 0 auto;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #cccccc;
+}
+
+a {
+    color: $accentPrimary;
+    text-decoration: none;
+}
+
+a:visited {
+    color: desaturate($accentPrimary, 33%);
+}
+
+a:hover, a:active {
+    color: lighten($accentPrimary, 20%);
+    text-decoration: underline;
+}

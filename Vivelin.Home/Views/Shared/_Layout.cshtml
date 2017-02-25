@@ -6,19 +6,42 @@
     <title>@ViewData["Title"] - Vivelin.net</title>
 
     <environment names="Development">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:700|Merriweather">
+        <link rel="stylesheet" href="~/lib/normalize-css/normalize.css" />
+        <link rel="stylesheet" href="~/lib/normalize-opentype.css/normalize-opentype.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:700|Merriweather">
+        <link rel="stylesheet" href="~/lib/normalize.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
+    <header>
+        <h1 class="with image">
+            <img class="avatar" src="~/images/avatars/midna.png" alt="" />
+            Vivelin
+        </h1>
+    </header>
+
     <main>
         @RenderBody()
     </main>
 
     <footer>
-        <p>&copy; 2017 - Vivelin.Home</p>
+        <hr />
+
+        <p>
+            <a rel="author" href="mailto:laura@vivelin.net">laura@vivelin.net</a>
+        </p>
+        <ul class="icon-list">
+            <li>
+                <a class="website icon" href="https://twitter.com/_Vivelin" rel="external">
+                    <img src="~/images/icons/twitter.png" alt="@@_Vivelin" />
+                </a>
+            </li>
+        </ul>
     </footer>
 
     @RenderSection("Scripts", required: false)

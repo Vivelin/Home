@@ -7,5 +7,12 @@
     "inputFiles": [
       "wwwroot/css/site.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/normalize.min.css",
+    "inputFiles": [
+      "wwwroot/lib/normalize-css/normalize.css",
+      "wwwroot/lib/normalize-opentype.css/normalize-opentype.css"
+    ]
   }
 ]
