@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\css\base.css" />
     <Content Include="wwwroot\css\_base.css" />
     <Content Include="wwwroot\css\_base.min.css" />
     <Content Include="wwwroot\css\_base.scss" />
@@ -17,10 +16,8 @@
     <Content Include="wwwroot\css\site.min.css" />
     <Content Include="wwwroot\css\site.scss" />
     <Content Include="wwwroot\css\_elements.scss" />
-    <Content Include="wwwroot\css\_profile.scss" />
     <Content Include="wwwroot\css\_typography.scss" />
     <Content Include="wwwroot\images\avatars\midna.png" />
-    <Content Include="wwwroot\images\midna.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
