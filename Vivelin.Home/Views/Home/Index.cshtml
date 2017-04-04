@@ -2,4 +2,17 @@
     ViewData["Title"] = "Home";
 }
 
-<p>The quick brown fox jumped over the lazy dog.</p>
+@if (ViewData.ContainsKey("QuoteText"))
+{
+    <blockquote>
+        <p>@Html.Raw(ViewData["QuoteText"])</p>
+        <footer>
+            <span>&mdash;</span>
+            <cite>@ViewData["QuoteCite"]</cite>
+        </footer>
+    </blockquote>
+}
+else
+{
+    <p>The quick brown fox jumped over the lazy dog.</p>
+}

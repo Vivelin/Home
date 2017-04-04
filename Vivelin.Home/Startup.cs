@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Vivelin.Home.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vivelin.Home
 {
@@ -29,6 +31,10 @@ namespace Vivelin.Home
         {
             // Add framework services.
             services.AddMvc();
+            services.AddDbContext<HomeContext>(options =>
+            {
+                options.UseSqlite(Configuration.GetConnectionString("HomeContext"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,14 +53,29 @@ namespace Vivelin.Home
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            // I feel like I need to throw up...
+            ConfigureDbContextMigrationsAsync(app)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
 
+            app.UseStaticFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private async Task ConfigureDbContextMigrationsAsync(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var context = serviceScope.ServiceProvider.GetService<HomeContext>())
+            {
+                await context.Database.MigrateAsync();
+                await context.SeedAsync();
+            }
         }
     }
 }
