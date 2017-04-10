@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vivelin.Home.Data;
+using Vivelin.Home.ViewModels;
 
 namespace Vivelin.Home.Controllers
 {
@@ -18,13 +19,11 @@ namespace Vivelin.Home.Controllers
 
         public IActionResult Index()
         {
-            var quote = Context.Quotes.Sample();
-            if (quote != null)
+            var viewModel = new HomeViewModel
             {
-                ViewData["QuoteText"] = quote.Text;
-                ViewData["QuoteCite"] = quote.Citation;
-            }
-            return View();
+                Quote = Context.Quotes.Sample()
+            };
+            return View(viewModel);
         }
 
         public IActionResult Error()

@@ -23,13 +23,20 @@ h5 {
 h6 {
   font-size: .83em; }
 
-header, main, footer {
+body > header,
+body > main,
+body > footer {
   max-width: 78ch; }
+
+blockquote footer {
+  font-size: .8em; }
 
 body {
   margin: 1em; }
 
-header, main, footer {
+body > header,
+body > main,
+body > footer {
   margin: 0 auto; }
 
 hr {

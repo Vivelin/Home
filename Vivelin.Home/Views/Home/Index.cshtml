@@ -1,14 +1,15 @@
-﻿@{
+﻿@model Vivelin.Home.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home";
 }
 
-@if (ViewData.ContainsKey("QuoteText"))
+@if (Model.Quote != null)
 {
     <blockquote>
-        <p>@Html.Raw(ViewData["QuoteText"])</p>
+        <p commonmark="@Model.Quote.Text"></p>
         <footer>
             <span>&mdash;</span>
-            <cite>@ViewData["QuoteCite"]</cite>
+            <cite>@Model.Quote.Citation</cite>
         </footer>
     </blockquote>
 }
