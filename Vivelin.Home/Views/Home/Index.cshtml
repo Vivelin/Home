@@ -5,11 +5,10 @@
 
 @if (Model.Quote != null)
 {
-    <blockquote>
-        <p commonmark="@Model.Quote.Text"></p>
+    <blockquote commonmark="@Model.Quote.Text">
         <footer>
             <span>&mdash;</span>
-            <cite>@Model.Quote.Citation</cite>
+            <cite>@Html.Raw(Model.Quote.Citation)</cite>
         </footer>
     </blockquote>
 }
