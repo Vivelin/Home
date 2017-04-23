@@ -25,3 +25,17 @@ ul.icon-list {
     height: 32px;
     vertical-align: bottom;
 }
+
+figure.quote {
+    margin-left: 1em;
+    margin-right: 1em;
+
+    blockquote {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    figcaption:before {
+        content: '—';
+    }
+}

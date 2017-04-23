@@ -1,4 +1,5 @@
-﻿body {
+﻿@charset "UTF-8";
+body {
   font-family: Merriweather, 'Sitka Text', 'Palatino Linotype', serif;
   font-size: 1.2rem; }
 
@@ -73,4 +74,13 @@ ul.icon-list {
   width: 32px;
   height: 32px;
   vertical-align: bottom; }
+
+figure.quote {
+  margin-left: 1em;
+  margin-right: 1em; }
+  figure.quote blockquote {
+    margin-left: 0;
+    margin-right: 0; }
+  figure.quote figcaption:before {
+    content: '—'; }
 

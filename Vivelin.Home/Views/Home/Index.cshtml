@@ -5,14 +5,12 @@
 
 @if (Model.Quote != null)
 {
-    <blockquote commonmark="@Model.Quote.Text">
-        <footer>
-            <span>&mdash;</span>
-            <cite>@Html.Raw(Model.Quote.Citation)</cite>
-        </footer>
-    </blockquote>
-}
-else
-{
-    <p>The quick brown fox jumped over the lazy dog.</p>
+    <figure class="quote" id="@Model.Quote.ID">
+        <blockquote use-commonmark="true">
+            @Html.Raw(Model.Quote.Text)
+        </blockquote>
+        <figcaption>
+            @Html.Raw(Model.Quote.Citation)
+        </figcaption>
+    </figure>
 }

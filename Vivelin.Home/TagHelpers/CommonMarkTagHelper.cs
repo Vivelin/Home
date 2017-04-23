@@ -7,16 +7,22 @@ using System.Threading.Tasks;
 
 namespace Vivelin.Home.TagHelpers
 {
-    [HtmlTargetElement(Attributes = "commonmark")]
+    [HtmlTargetElement(Attributes = "use-commonmark")]
     public class CommonMarkTagHelper : TagHelper
     {
-        [HtmlAttributeName("commonmark")]
-        public string CommonMark { get; set; }
+        [HtmlAttributeName("use-commonmark")]
+        public bool UseCommonMark { get; set; }
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            var html = CommonMarkConverter.Convert(CommonMark);
-            output.PreContent.SetHtmlContent(html);
+            if (UseCommonMark)
+            {
+                var childContent = await output.GetChildContentAsync();
+                var rawContent = childContent.GetRawContent(out string pre, out string post);
+
+                var html = CommonMarkConverter.Convert(rawContent).Trim();
+                output.Content.SetHtmlContent(pre + html + post);
+            }
         }
     }
 }
