@@ -1,4 +1,20 @@
 ﻿@charset "UTF-8";
+/*
+    // Night mode
+
+    $background: #212121;
+    $foreground: #fafafa;
+    $accentPrimary: #8fc045;
+    $accentSecondary: #ea005e;
+*/
+/*
+    // Game Boy mode
+
+    $background: #9bbc0f;
+    $foreground: #0f380f;
+    $accentPrimary: #306230;
+    $accentSecondary: #306230;
+*/
 body {
   font-family: Merriweather, 'Sitka Text', 'Palatino Linotype', serif;
   font-size: 1.2rem; }
@@ -32,6 +48,10 @@ body > footer {
 blockquote footer {
   font-size: .8em; }
 
+html {
+  color: #212121;
+  background-color: white; }
+
 body {
   margin: 1em; }
 
@@ -42,7 +62,7 @@ body > footer {
 
 hr {
   border: none;
-  border-top: 1px solid #cccccc; }
+  border-top: 1px solid rgba(33, 33, 33, 0.2); }
 
 a {
   color: #ea005e;
@@ -52,7 +72,6 @@ a:visited {
   color: #c32766; }
 
 a:hover, a:active {
-  color: #ff5197;
   text-decoration: underline; }
 
 .with.image {
@@ -69,11 +88,17 @@ a:hover, a:active {
 ul.icon-list {
   list-style-type: none;
   padding-left: 0; }
+  ul.icon-list li {
+    float: left;
+    margin-right: .5em; }
+  ul.icon-list li:last-child {
+    margin-right: 0; }
 
 .website.icon img {
   width: 32px;
   height: 32px;
-  vertical-align: bottom; }
+  vertical-align: bottom;
+  background-color: #ea005e; }
 
 figure.quote {
   margin-left: 1em;

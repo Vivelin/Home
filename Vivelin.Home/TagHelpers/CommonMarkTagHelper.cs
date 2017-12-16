@@ -19,7 +19,7 @@ namespace Vivelin.Home.TagHelpers
             {
                 var childContent = await output.GetChildContentAsync();
                 var rawContent = childContent.GetRawContent(out string pre, out string post);
-
+                
                 var html = CommonMarkConverter.Convert(rawContent).Trim();
                 output.Content.SetHtmlContent(pre + html + post);
             }

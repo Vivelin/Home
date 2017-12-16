@@ -1,21 +1,46 @@
-﻿$accentPrimary: #ea005e;
+﻿$background: white;
+$foreground: #212121;
+$accentPrimary: #ea005e;
 $accentSecondary: #8fc045;
 
+/*
+    // Night mode
+
+    $background: #212121;
+    $foreground: #fafafa;
+    $accentPrimary: #8fc045;
+    $accentSecondary: #ea005e;
+*/
+
+/*
+    // Game Boy mode
+
+    $background: #9bbc0f;
+    $foreground: #0f380f;
+    $accentPrimary: #306230;
+    $accentSecondary: #306230;
+*/
+
 @import 'typography';
+
+html {
+    color: $foreground;
+    background-color: $background;
+}
 
 body {
     margin: 1em;
 }
 
-body > header, 
-body > main, 
+body > header,
+body > main,
 body > footer {
     margin: 0 auto;
 }
 
 hr {
     border: none;
-    border-top: 1px solid #cccccc;
+    border-top: 1px solid rgba($foreground, .2);
 }
 
 a {
@@ -28,6 +53,5 @@ a:visited {
 }
 
 a:hover, a:active {
-    color: lighten($accentPrimary, 20%);
     text-decoration: underline;
 }

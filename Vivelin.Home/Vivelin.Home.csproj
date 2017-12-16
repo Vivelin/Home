@@ -9,15 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\css\_base.scss" />
-    <Content Include="wwwroot\css\site.css" />
-    <Content Include="wwwroot\css\site.min.css" />
-    <Content Include="wwwroot\css\site.scss" />
-    <Content Include="wwwroot\css\_elements.scss" />
-    <Content Include="wwwroot\css\_typography.scss" />
-    <Content Include="wwwroot\images\avatars\midna.png" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1" />
@@ -32,5 +23,4 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
-
 </Project>

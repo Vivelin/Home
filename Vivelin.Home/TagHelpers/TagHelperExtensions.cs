@@ -25,7 +25,7 @@ namespace Vivelin.Home.TagHelpers
         /// The string from which to remove leading and trailling whitespace characters.
         /// </param>
         /// <param name="leadingWhitespace">
-        /// When this method returns, contains the whitespace that was removed 
+        /// When this method returns, contains the whitespace that was removed
         /// from the start of the string.
         /// </param>
         /// <param name="trailingWhitespace">

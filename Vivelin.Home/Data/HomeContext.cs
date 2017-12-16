@@ -19,13 +19,17 @@ namespace Vivelin.Home.Data
             var migrations = await Database.GetPendingMigrationsAsync();
             if (migrations.Any())
                 throw new InvalidOperationException("Unable to seed a database with pending migrations");
-            
+
+#if DEBUG
+            await Database.ExecuteSqlCommandAsync("DELETE FROM Quotes");
+#endif
+
             var hasQuotes = await Quotes.AnyAsync();
             if (!hasQuotes)
             {
                 Quotes.Add(new Quote
                 {
-                    Text = "<q>I speak metaphorically, my lord,</q> he said. Russ nodded, still amused. <q>That's all right, Constantin. Sometimes I dismember metaphorically.</q>",
+                    Text = "<q>I speak metaphorically, my lord,</q> he said. Russ nodded, still amused. <q>That’s all right, Constantin. Sometimes I dismember metaphorically.</q>",
                     Citation = "Dan Abnett. <cite>Prospero Burns</cite> (Black Library, 2014), 331."
                 });
 
@@ -37,8 +41,56 @@ namespace Vivelin.Home.Data
 
                 Quotes.Add(new Quote
                 {
-                    Text = "<q>I had no idea who she is. I knew as much about myself and what I wanted as I do about how to squeeze a fruit in a grocery store and know if it's gonna be good in a meal. I still don't know; I'd pick up a lemon and squeeze it and I'm like <q>Well, it's definitely a lemon... 'cause there's a label here that says so... Guess we're gonna order out tonight.</q></q>",
+                    Text = "<q>I had no idea who she is. I knew as much about myself and what I wanted as I do about how to squeeze a fruit in a grocery store and know if it’s gonna be good in a meal. I still don’t know; I’d pick up a lemon and squeeze it and I’m like <q>Well, it’s definitely a lemon... ’cause there's a label here that says so... Guess we’re gonna order out tonight.</q></q>",
                     Citation = "Sean Plott. <cite><a href='https://youtu.be/CdLnuGAPNUg?t=195' target='_blank' rel='external'>Day[9] Story Time #5 - A High School Crush</a></cite>."
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>Jelly… Jelly… I'm gonna call you <i>strawberry preserve</i> ’cause you're so je— Don't look at me like that!</q>",
+                    Citation = "Jesse Cox. <cite><a href='https://youtu.be/fY9i91pEFWQ?t=1789' target='_blank' rel='external'>The Infectious Madness of Doctor Dekker w/ Dodger [Part 4] - Loop Day</a></cite>."
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>You dare steal in my presence?! That will cost you your life!</q>",
+                    Citation = "<cite>Assassin’s Creed</cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>Dirty thief! I’ll have your hand for that!</q>",
+                    Citation = "<cite>Assassin’s Creed</cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>GO GO GO!</q>",
+                    Citation = "<cite><a href='https://www.youtube.com/watch?v=ElXnQEr8rlU' target='_blank' rel='external'>Mass Effect</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>Hold the line!</q>",
+                    Citation = "<cite>Mass Effect</cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>ENEMY IS EVERYWHERE!</q>",
+                    Citation = "<cite><a href='https://www.youtube.com/watch?v=FOwSHXK0444' target='_blank' rel='external'>Mass Effect</cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>I will destroy you!</q>",
+                    Citation = "<cite>Mass Effect</cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>User alert! Main reactor shut down in accordance with emergency containment procedures. Manual restart required.</q>",
+                    Citation = "<cite>Mass Effect</cite>"
                 });
 
                 await SaveChangesAsync();

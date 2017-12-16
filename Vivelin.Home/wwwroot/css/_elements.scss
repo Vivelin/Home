@@ -18,12 +18,22 @@
 ul.icon-list {
     list-style-type: none;
     padding-left: 0;
+
+    li {
+        float: left;
+        margin-right: .5em;
+    }
+
+    li:last-child {
+        margin-right: 0;
+    }
 }
 
 .website.icon img {
     width: 32px;
     height: 32px;
     vertical-align: bottom;
+    background-color: $accentPrimary;
 }
 
 figure.quote {
@@ -34,7 +44,7 @@ figure.quote {
         margin-left: 0;
         margin-right: 0;
     }
-    
+
     figcaption:before {
         content: '—';
     }
