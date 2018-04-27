@@ -29,7 +29,6 @@ namespace Vivelin.Home
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services.AddMvc();
             services.AddDbContext<HomeContext>(options =>
             {
@@ -53,7 +52,6 @@ namespace Vivelin.Home
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            // I feel like I need to throw up...
             ConfigureDbContextMigrationsAsync(app)
                 .ConfigureAwait(false)
                 .GetAwaiter()
