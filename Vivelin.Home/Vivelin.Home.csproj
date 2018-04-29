@@ -12,11 +12,12 @@
 
   <ItemGroup>
     <None Remove="home.db" />
-    <None Remove="Scripts\index.ts" />
+    <None Remove="Scripts\index.tsx" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Twitch" Version="2.0.0-rc2-final" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.6.375" />
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.3" />
@@ -37,8 +38,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Authentication\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.ts" />
+    <TypeScriptCompile Include="Scripts\index.tsx" />
   </ItemGroup>
 </Project>

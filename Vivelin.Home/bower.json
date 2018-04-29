@@ -1,5 +1,5 @@
 {
-  "name": "asp.net",
+  "name": "@vivelin/home",
   "private": true,
   "dependencies": {
     "normalize-css": "v2.1.3",
