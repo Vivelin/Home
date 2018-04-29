@@ -14,5 +14,22 @@
       "wwwroot/lib/normalize-css/normalize.css",
       "wwwroot/lib/normalize-opentype.css/normalize-opentype.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/index.js",
+    "inputFiles": [
+      "Scripts/**/*.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/index.min.js",
+    "inputFiles": [
+      "wwwroot/js/index.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
   }
 ]
