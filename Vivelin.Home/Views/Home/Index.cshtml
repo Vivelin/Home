@@ -14,3 +14,20 @@
         </figcaption>
     </figure>
 }
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Logged in as <b class="user-name">@User.Identity.Name</b>.</p>
+
+    <form action="/logout" method="post">
+        <input type="hidden" name="returnUrl" value="/" />
+        <p><button type="submit">Log out</button></p>
+    </form>
+}
+else
+{
+    <form action="/login" method="post">
+        <input type="hidden" name="returnUrl" value="/" />
+        <p><button type="submit">Connect using Twitch</button></p>
+    </form>
+}
