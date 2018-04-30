@@ -18,10 +18,16 @@ class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch
         }
 
         const streamUrl = 'https://www.twitch.tv/' + this.props.user.login
+        const thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360')
         return (
-            <a href={streamUrl} target='blank' rel='external'>
-                <img src={this.props.user.profile_image_url} alt={this.props.user.display_name} title={this.props.stream.title} />
-            </a>
+            <div className='twitchStream' style={{backgroundImage: 'url(' + thumbnailUrl + ')'}}>
+                <header>
+                    <a href={streamUrl} target='blank' rel='external' className='twitchStream-profileLink'>
+                        <img src={this.props.user.profile_image_url} alt={this.props.user.display_name} title={this.props.user.display_name} className='twitchStream-profileImage' />
+                    </a>
+                    <b className='twitchStream-title'>{this.props.stream.title}</b>
+                </header>
+            </div>
         )
     }
 }
@@ -44,7 +50,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     }
 
     render() {
-        const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers);
+        const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers)
         if (isMissingData && !this.state.errorMessage) {
             return <p>Loading data…</p>
         }
@@ -56,16 +62,10 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
             return <p>{this.state.errorName}: {this.state.errorMessage}</p>
         }
 
-        return (
-            <div>
-                {
-                    this.state.streams.map((stream, index) => {
-                        const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
-                        return <TwitchStream key={index} user={user} stream={stream} />
-                    })
-                }
-            </div>
-        )
+        return this.state.streams.map((stream, index) => {
+            const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
+            return <TwitchStream key={index} user={user} stream={stream} />
+        })
     }
 
     private fetchUser() {
@@ -96,7 +96,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         this.sendRequest<Twitch.User>(usersUri, response => {
             this.setState((prevState) => ({
                 streamsUsers: prevState.streamsUsers ? prevState.streamsUsers.concat(response.data) : response.data
-            }));
+            }))
         })
 
         if (response.pagination) {
@@ -107,7 +107,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     private sendRequest<T>(relativeUri: string, successCallback: (data: Twitch.Response<T>) => void) {
         var request = new XMLHttpRequest()
         request.onload = e => {
-            const response = JSON.parse(request.responseText) as Twitch.Response<T>;
+            const response = JSON.parse(request.responseText) as Twitch.Response<T>
             if (response.error) {
                 this.setState({
                     errorName: response.error,
@@ -125,7 +125,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
 }
 
 {
-    const container = document.getElementById('twitch-follows');
+    const container = document.getElementById('twitch-follows')
     if (container) {
         const userId = container.dataset.userId
         const accessToken = container.dataset.accessToken

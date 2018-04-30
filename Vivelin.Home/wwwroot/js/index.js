@@ -18,8 +18,12 @@ var TwitchStream = (function (_super) {
             return null;
         }
         var streamUrl = 'https://www.twitch.tv/' + this.props.user.login;
-        return (React.createElement("a", { href: streamUrl, target: 'blank', rel: 'external' },
-            React.createElement("img", { src: this.props.user.profile_image_url, alt: this.props.user.display_name, title: this.props.stream.title })));
+        var thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360');
+        return (React.createElement("div", { className: 'twitchStream', style: { backgroundImage: 'url(' + thumbnailUrl + ')' } },
+            React.createElement("header", null,
+                React.createElement("a", { href: streamUrl, target: 'blank', rel: 'external', className: 'twitchStream-profileLink' },
+                    React.createElement("img", { src: this.props.user.profile_image_url, alt: this.props.user.display_name, title: this.props.user.display_name, className: 'twitchStream-profileImage' })),
+                React.createElement("b", { className: 'twitchStream-title' }, this.props.stream.title))));
     };
     return TwitchStream;
 }(React.Component));
@@ -55,10 +59,10 @@ var TwitchFollows = (function (_super) {
                 ": ",
                 this.state.errorMessage);
         }
-        return (React.createElement("div", null, this.state.streams.map(function (stream, index) {
+        return this.state.streams.map(function (stream, index) {
             var user = _this.state.streamsUsers.filter(function (x) { return x.id === stream.user_id; })[0];
             return React.createElement(TwitchStream, { key: index, user: user, stream: stream });
-        })));
+        });
     };
     TwitchFollows.prototype.fetchUser = function () {
         var _this = this;
