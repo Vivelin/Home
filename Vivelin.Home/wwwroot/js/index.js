@@ -14,11 +14,12 @@ var TwitchStream = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TwitchStream.prototype.render = function () {
+        if (!this.props.user) {
+            return null;
+        }
         var streamUrl = 'https://www.twitch.tv/' + this.props.user.login;
-        return React.createElement("a", { href: streamUrl, target: 'blank', rel: 'external' },
-            this.props.user.display_name,
-            " streaming ",
-            this.props.stream.title);
+        return (React.createElement("a", { href: streamUrl, target: 'blank', rel: 'external' },
+            React.createElement("img", { src: this.props.user.profile_image_url, alt: this.props.user.display_name, title: this.props.stream.title })));
     };
     return TwitchStream;
 }(React.Component));
@@ -54,10 +55,9 @@ var TwitchFollows = (function (_super) {
                 ": ",
                 this.state.errorMessage);
         }
-        return (React.createElement("ul", null, this.state.streams.map(function (stream, index) {
+        return (React.createElement("div", null, this.state.streams.map(function (stream, index) {
             var user = _this.state.streamsUsers.filter(function (x) { return x.id === stream.user_id; })[0];
-            return React.createElement("li", { key: index },
-                React.createElement(TwitchStream, { user: user, stream: stream }));
+            return React.createElement(TwitchStream, { key: index, user: user, stream: stream });
         })));
     };
     TwitchFollows.prototype.fetchUser = function () {
@@ -70,20 +70,28 @@ var TwitchFollows = (function (_super) {
     };
     TwitchFollows.prototype.fetchStreams = function () {
         var _this = this;
-        this.sendRequest('users/follows?first=100&from_id=' + this.props.userId, function (response) {
-            var streamsUri = 'streams?user_id=' + response.data.map(function (x) { return x.to_id; }).join('&user_id=');
-            _this.sendRequest(streamsUri, function (response) {
-                _this.setState({
-                    streams: response.data
-                });
-            });
-            var usersUri = 'users?id=' + response.data.map(function (x) { return x.to_id; }).join('&id=');
-            _this.sendRequest(usersUri, function (response) {
-                _this.setState({
-                    streamsUsers: response.data
-                });
-            });
+        this.sendRequest('users/follows?from_id=' + this.props.userId, function (response) { return _this.loadStreams(response); });
+    };
+    TwitchFollows.prototype.loadStreams = function (response) {
+        var _this = this;
+        if (response.data.length == 0) {
+            return;
+        }
+        var streamsUri = 'streams?user_id=' + response.data.map(function (x) { return x.to_id; }).join('&user_id=');
+        this.sendRequest(streamsUri, function (response) {
+            _this.setState(function (prevState) { return ({
+                streams: prevState.streams ? prevState.streams.concat(response.data) : response.data
+            }); });
         });
+        var usersUri = 'users?id=' + response.data.map(function (x) { return x.to_id; }).join('&id=');
+        this.sendRequest(usersUri, function (response) {
+            _this.setState(function (prevState) { return ({
+                streamsUsers: prevState.streamsUsers ? prevState.streamsUsers.concat(response.data) : response.data
+            }); });
+        });
+        if (response.pagination) {
+            this.sendRequest('users/follows?from_id=' + this.props.userId + '&after=' + response.pagination.cursor, function (response) { return _this.loadStreams(response); });
+        }
     };
     TwitchFollows.prototype.sendRequest = function (relativeUri, successCallback) {
         var _this = this;

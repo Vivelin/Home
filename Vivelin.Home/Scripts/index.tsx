@@ -3,14 +3,30 @@
     accessToken: string
 }
 
+interface TwitchFollowsState {
+    user: Twitch.User
+    streams: Twitch.Stream[]
+    streamsUsers: Twitch.User[]
+    errorName: string
+    errorMessage: string
+}
+
 class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch.User }> {
     render() {
+        if (!this.props.user) {
+            return null
+        }
+
         const streamUrl = 'https://www.twitch.tv/' + this.props.user.login
-        return <a href={streamUrl} target='blank' rel='external'>{this.props.user.display_name} streaming {this.props.stream.title}</a>
+        return (
+            <a href={streamUrl} target='blank' rel='external'>
+                <img src={this.props.user.profile_image_url} alt={this.props.user.display_name} title={this.props.stream.title} />
+            </a>
+        )
     }
 }
 
-class TwitchFollows extends React.Component<TwitchFollowsProps, { user: Twitch.User, streams: Twitch.Stream[], streamsUsers: Twitch.User[], errorName: string, errorMessage: string }> {
+class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsState> {
     constructor(props: TwitchFollowsProps) {
         super(props)
         this.state = {
@@ -41,14 +57,15 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, { user: Twitch.U
         }
 
         return (
-            <ul>
+            <div>
                 {
                     this.state.streams.map((stream, index) => {
                         const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
-                        return <li key={index}><TwitchStream user={user} stream={stream} /></li>
+                        return <TwitchStream key={index} user={user} stream={stream} />
                     })
                 }
-            </ul>)
+            </div>
+        )
     }
 
     private fetchUser() {
@@ -60,21 +77,31 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, { user: Twitch.U
     }
 
     private fetchStreams() {
-        this.sendRequest<Twitch.Follow>('users/follows?first=100&from_id=' + this.props.userId, response => {
-            const streamsUri = 'streams?user_id=' + response.data.map(x => x.to_id).join('&user_id=')
-            this.sendRequest<Twitch.Stream>(streamsUri, response => {
-                this.setState({
-                    streams: response.data
-                })
-            })
+        this.sendRequest<Twitch.Follow>('users/follows?from_id=' + this.props.userId, response => this.loadStreams(response))
+    }
 
-            const usersUri = 'users?id=' + response.data.map(x => x.to_id).join('&id=')
-            this.sendRequest<Twitch.User>(usersUri, response => {
-                this.setState({
-                    streamsUsers: response.data
-                });
-            })
+    private loadStreams(response: Twitch.Response<Twitch.Follow>) {
+        if (response.data.length == 0) {
+            return
+        }
+
+        const streamsUri = 'streams?user_id=' + response.data.map(x => x.to_id).join('&user_id=')
+        this.sendRequest<Twitch.Stream>(streamsUri, response => {
+            this.setState((prevState) => ({
+                streams: prevState.streams ? prevState.streams.concat(response.data) : response.data
+            }))
         })
+
+        const usersUri = 'users?id=' + response.data.map(x => x.to_id).join('&id=')
+        this.sendRequest<Twitch.User>(usersUri, response => {
+            this.setState((prevState) => ({
+                streamsUsers: prevState.streamsUsers ? prevState.streamsUsers.concat(response.data) : response.data
+            }));
+        })
+
+        if (response.pagination) {
+            this.sendRequest<Twitch.Follow>('users/follows?from_id=' + this.props.userId + '&after=' + response.pagination.cursor, response => this.loadStreams(response))
+        }
     }
 
     private sendRequest<T>(relativeUri: string, successCallback: (data: Twitch.Response<T>) => void) {
