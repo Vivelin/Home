@@ -14,16 +14,22 @@ var TwitchStream = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TwitchStream.prototype.render = function () {
-        if (!this.props.user) {
+        if (!this.props.user || !this.props.game) {
             return null;
         }
         var streamUrl = 'https://www.twitch.tv/' + this.props.user.login;
         var thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360');
-        return (React.createElement("div", { className: 'twitchStream', style: { backgroundImage: 'url(' + thumbnailUrl + ')' } },
-            React.createElement("header", null,
-                React.createElement("a", { href: streamUrl, target: 'blank', rel: 'external', className: 'twitchStream-profileLink' },
-                    React.createElement("img", { src: this.props.user.profile_image_url, alt: this.props.user.display_name, title: this.props.user.display_name, className: 'twitchStream-profileImage' })),
-                React.createElement("b", { className: 'twitchStream-title' }, this.props.stream.title))));
+        return (React.createElement("figure", { className: 'twitchStream' },
+            React.createElement("a", { href: streamUrl, target: '_blank', rel: 'external' },
+                React.createElement("img", { src: thumbnailUrl, alt: this.props.stream.title, className: 'twitchStream-thumbnail' })),
+            React.createElement("figcaption", null,
+                React.createElement("a", { href: streamUrl, target: '_blank', rel: 'external' },
+                    React.createElement("img", { src: this.props.user.profile_image_url, alt: this.props.user.display_name, title: this.props.user.display_name, className: 'twitchStream-profileImage' }),
+                    React.createElement("b", { className: 'twitchStream-title', title: this.props.stream.title }, this.props.stream.title),
+                    React.createElement("span", { className: 'twitchStream-description' },
+                        this.props.user.display_name,
+                        " // ",
+                        this.props.game.name)))));
     };
     return TwitchStream;
 }(React.Component));
@@ -35,6 +41,7 @@ var TwitchFollows = (function (_super) {
             user: null,
             streams: null,
             streamsUsers: null,
+            games: null,
             errorName: null,
             errorMessage: null
         };
@@ -46,7 +53,7 @@ var TwitchFollows = (function (_super) {
     };
     TwitchFollows.prototype.render = function () {
         var _this = this;
-        var isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers);
+        var isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers || !this.state.games);
         if (isMissingData && !this.state.errorMessage) {
             return React.createElement("p", null, "Loading data\u2026");
         }
@@ -61,7 +68,8 @@ var TwitchFollows = (function (_super) {
         }
         return this.state.streams.map(function (stream, index) {
             var user = _this.state.streamsUsers.filter(function (x) { return x.id === stream.user_id; })[0];
-            return React.createElement(TwitchStream, { key: index, user: user, stream: stream });
+            var game = _this.state.games.filter(function (x) { return x.id === stream.game_id; })[0];
+            return React.createElement(TwitchStream, { key: index, user: user, stream: stream, game: game });
         });
     };
     TwitchFollows.prototype.fetchUser = function () {
@@ -86,6 +94,12 @@ var TwitchFollows = (function (_super) {
             _this.setState(function (prevState) { return ({
                 streams: prevState.streams ? prevState.streams.concat(response.data) : response.data
             }); });
+            var gamesUri = 'games?id=' + response.data.map(function (x) { return x.game_id; }).join('&id=');
+            _this.sendRequest(gamesUri, function (response) {
+                _this.setState(function (prevState) { return ({
+                    games: prevState.games ? prevState.games.concat(response.data) : response.data
+                }); });
+            });
         });
         var usersUri = 'users?id=' + response.data.map(function (x) { return x.to_id; }).join('&id=');
         this.sendRequest(usersUri, function (response) {

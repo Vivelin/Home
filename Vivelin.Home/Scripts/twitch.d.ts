@@ -85,6 +85,17 @@
         viewer_count: Number
     }
 
+    interface Game {
+        /** Game ID. */
+        id: string
+
+        /** Game name. */
+        name: string
+
+        /** Template URL for the game’s box art. */
+        box_art_url: string
+    }
+
     interface Response<T> {
         data?: T[]
         error?: string

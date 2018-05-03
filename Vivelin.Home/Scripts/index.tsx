@@ -7,27 +7,33 @@ interface TwitchFollowsState {
     user: Twitch.User
     streams: Twitch.Stream[]
     streamsUsers: Twitch.User[]
+    games: Twitch.Game[]
     errorName: string
     errorMessage: string
 }
 
-class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch.User }> {
+class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch.User, game: Twitch.Game }> {
     render() {
-        if (!this.props.user) {
+        if (!this.props.user || !this.props.game) {
             return null
         }
 
         const streamUrl = 'https://www.twitch.tv/' + this.props.user.login
         const thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360')
         return (
-            <div className='twitchStream' style={{backgroundImage: 'url(' + thumbnailUrl + ')'}}>
-                <header>
-                    <a href={streamUrl} target='blank' rel='external' className='twitchStream-profileLink'>
+            <figure className='twitchStream'>
+                <a href={streamUrl} target='_blank' rel='external'>
+                    <img src={thumbnailUrl} alt={this.props.stream.title} className='twitchStream-thumbnail' />
+                </a>
+
+                <figcaption>
+                    <a href={streamUrl} target='_blank' rel='external'>
                         <img src={this.props.user.profile_image_url} alt={this.props.user.display_name} title={this.props.user.display_name} className='twitchStream-profileImage' />
+                        <b className='twitchStream-title' title={this.props.stream.title}>{this.props.stream.title}</b>
+                        <span className='twitchStream-description'>{this.props.user.display_name} // {this.props.game.name}</span>
                     </a>
-                    <b className='twitchStream-title'>{this.props.stream.title}</b>
-                </header>
-            </div>
+                </figcaption>
+            </figure>
         )
     }
 }
@@ -39,6 +45,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
             user: null,
             streams: null,
             streamsUsers: null,
+            games: null,
             errorName: null,
             errorMessage: null
         }
@@ -50,7 +57,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     }
 
     render() {
-        const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers)
+        const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers || !this.state.games)
         if (isMissingData && !this.state.errorMessage) {
             return <p>Loading data…</p>
         }
@@ -64,7 +71,8 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
 
         return this.state.streams.map((stream, index) => {
             const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
-            return <TwitchStream key={index} user={user} stream={stream} />
+            const game = this.state.games.filter(x => x.id === stream.game_id)[0]
+            return <TwitchStream key={index} user={user} stream={stream} game={game} />
         })
     }
 
@@ -90,6 +98,13 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
             this.setState((prevState) => ({
                 streams: prevState.streams ? prevState.streams.concat(response.data) : response.data
             }))
+
+            const gamesUri = 'games?id=' + response.data.map(x => x.game_id).join('&id=')
+            this.sendRequest<Twitch.Game>(gamesUri, response => {
+                this.setState((prevState) => ({
+                    games: prevState.games ? prevState.games.concat(response.data) : response.data
+                }))
+            })
         })
 
         const usersUri = 'users?id=' + response.data.map(x => x.to_id).join('&id=')
