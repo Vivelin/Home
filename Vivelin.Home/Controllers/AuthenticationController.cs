@@ -11,7 +11,7 @@ namespace Vivelin.Home.Controllers
         [HttpPost("~/login")]
         public IActionResult LogIn(string returnUrl)
         {
-            return Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, TwitchAuthenticationDefaults.AuthenticationScheme);
+            return Challenge(new AuthenticationProperties { RedirectUri = returnUrl, IsPersistent = true }, TwitchAuthenticationDefaults.AuthenticationScheme);
         }
 
         [HttpPost("~/logout")]
