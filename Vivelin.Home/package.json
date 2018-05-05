@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "name": "@vivelin/home",
+  "private": true,
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "9.6.7",
+    "@types/react": "^16.3.13",
+    "@types/react-dom": "^16.0.5"
+  }
+}

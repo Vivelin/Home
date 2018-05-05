@@ -1,0 +1,34 @@
+﻿.loader {
+    height: 4px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba($foreground, .03);
+    border-radius: 2px;
+}
+
+.loader[hidden] {
+    display: block;
+    visibility: hidden;
+}
+
+.loader:before {
+    display: block;
+    position: absolute;
+    content: "";
+    left: -200px;
+    width: 200px;
+    height: 4px;
+    background-color: $accentPrimary;
+    animation: ltr 2s ease-in-out infinite;
+}
+
+@keyframes ltr {
+    from {
+        left: -200px;
+    }
+
+    to {
+        left: 100%;
+    }
+}

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Vivelin.Home.Data;
 using Vivelin.Home.ViewModels;
@@ -17,8 +17,16 @@ namespace Vivelin.Home.Controllers
 
         public HomeContext Context { get; }
 
-        public IActionResult Index()
+        [HttpGet("~/")]
+        public async Task<IActionResult> Index()
         {
+            var authentication = await HttpContext.AuthenticateAsync();
+            if (authentication.Succeeded)
+            {
+                ViewBag.UserId = User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                ViewBag.AccessToken = authentication.Properties?.GetTokenValue("access_token");
+            }
+
             var viewModel = new HomeViewModel
             {
                 Quote = Context.Quotes.Sample()

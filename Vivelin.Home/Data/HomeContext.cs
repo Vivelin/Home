@@ -78,7 +78,7 @@ namespace Vivelin.Home.Data
                 Quotes.Add(new Quote
                 {
                     Text = "<q>ENEMY IS EVERYWHERE!</q>",
-                    Citation = "<cite><a href='https://www.youtube.com/watch?v=FOwSHXK0444' target='_blank' rel='external'>Mass Effect</cite>"
+                    Citation = "<cite><a href='https://www.youtube.com/watch?v=FOwSHXK0444' target='_blank' rel='external'>Mass Effect</a></cite>"
                 });
 
                 Quotes.Add(new Quote

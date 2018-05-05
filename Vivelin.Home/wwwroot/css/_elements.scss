@@ -49,3 +49,72 @@ figure.quote {
         content: '—';
     }
 }
+
+.twitchStreams {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+
+    .loader {
+        margin: .5rem 0;
+    }
+}
+
+.twitchStream {
+    $spacing: 5px;
+    $headerSize: 50px;
+    $width: ((960px - (3 * $spacing)) / 3);
+    $height: $width * (9 / 16);
+
+    width: $width;
+    height: $height;
+    margin-right: $spacing;
+    margin-bottom: $spacing;
+    overflow: hidden;
+
+    .twitchStream-thumbnail {
+        width: $width;
+        height: $height;
+    }
+
+    figcaption {
+        height: $headerSize;
+        font-size: .8rem;
+        color: white;
+        position: relative;
+        top: -$height;
+        margin: $spacing;
+        padding: $spacing;
+        margin-top: 0; /* For some reason, there's an extra ~5px margin on top */
+        background: rgba(0, 0, 0, .6);
+        -webkit-backdrop-filter: blur(1px);
+        backdrop-filter: blur(1px);
+        overflow: hidden;
+    }
+
+    figcaption > a {
+        display: block;
+        height: $headerSize;
+        color: white;
+    }
+
+    .twitchStream-profileImage {
+        width: $headerSize;
+        height: $headerSize;
+        float: left;
+    }
+
+    .twitchStream-title,
+    .twitchStream-description {
+        display: inline-block;
+        width: calc(#{$width} - #{$headerSize} - #{$spacing * 6});
+        margin: $spacing $spacing 0 $spacing;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .twitchStream-title {
+        font-weight: 600;
+    }
+}

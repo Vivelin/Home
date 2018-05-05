@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "module": "none",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react"
+  },
+  "compileOnSave": true
+}

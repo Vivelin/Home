@@ -14,5 +14,46 @@
       "wwwroot/lib/normalize-css/normalize.css",
       "wwwroot/lib/normalize-opentype.css/normalize-opentype.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/react.js",
+    "inputFiles": [
+      "node_modules/react/umd/react.development.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/react-dom.js",
+    "inputFiles": [
+      "node_modules/react-dom/umd/react-dom.development.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/react.min.js",
+    "inputFiles": [
+      "node_modules/react/umd/react.production.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/react-dom.min.js",
+    "inputFiles": [
+      "node_modules/react-dom/umd/react-dom.production.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/index.js",
+    "inputFiles": [
+      "Scripts/**/*.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/index.min.js",
+    "inputFiles": [
+      "wwwroot/js/index.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
   }
 ]

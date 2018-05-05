@@ -14,3 +14,35 @@
         </figcaption>
     </figure>
 }
+
+<div id="twitch-follows" class="twitchStreams"
+     data-user-id="@ViewBag.UserId"
+     data-access-token="@ViewBag.AccessToken"></div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form action="/logout" method="post">
+        <input type="hidden" name="returnUrl" value="/" />
+        <p><button type="submit">Log out</button></p>
+    </form>
+}
+else
+{
+    <form action="/login" method="post">
+        <input type="hidden" name="returnUrl" value="/" />
+        <p><button type="submit">Connect using Twitch</button></p>
+    </form>
+}
+
+@section Scripts {
+    <environment names="Development">
+        <script src="~/lib/react.js"></script>
+        <script src="~/lib/react-dom.js"></script>
+        <script src="~/js/index.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/react.min.js"></script>
+        <script src="~/lib/react-dom.min.js"></script>
+        <script src="~/js/index.min.js"></script>
+    </environment>
+}

@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Vivelin.Home.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Vivelin.Home
 {
@@ -21,6 +23,12 @@ namespace Vivelin.Home
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
             Configuration = builder.Build();
         }
 
@@ -29,11 +37,29 @@ namespace Vivelin.Home
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/login";
+                options.LogoutPath = "/logout";
+            })
+            .AddTwitch(options =>
+            {
+                options.ClientId = Configuration["TwitchClientId"];
+                options.ClientSecret = Configuration["TwitchClientSecret"];
+                options.SaveTokens = true;
+            });
+
             services.AddMvc();
             services.AddDbContext<HomeContext>(options =>
             {
                 options.UseSqlite(Configuration.GetConnectionString("HomeContext"));
             });
+
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +84,7 @@ namespace Vivelin.Home
                 .GetResult();
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
