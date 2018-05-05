@@ -114,27 +114,24 @@ figure.quote {
   margin: 1rem 0; }
 
 .twitchStream {
-  width: 320px;
-  height: 180px;
-  margin-right: .25rem;
-  margin-bottom: .25rem;
+  width: 315px;
+  height: 177.1875px;
+  margin-right: 5px;
+  margin-bottom: 5px;
   overflow: hidden; }
   .twitchStream .twitchStream-thumbnail {
-    width: 320px;
-    height: 180px;
-    z-index: -1; }
+    width: 315px;
+    height: 177.1875px; }
   .twitchStream figcaption {
     height: 50px;
-    /*font-family: Lato, sans-serif;*/
     font-size: .8rem;
     color: white;
     position: relative;
-    top: -180px;
-    margin: .25rem;
-    padding: .25rem;
+    top: -177.1875px;
+    margin: 5px;
+    padding: 5px;
     margin-top: 0;
-    /* For some reason, there's an extra .25rem margin on top */
-    /*pointer-events: none;*/
+    /* For some reason, there's an extra ~5px margin on top */
     background: rgba(0, 0, 0, 0.6);
     -webkit-backdrop-filter: blur(1px);
     backdrop-filter: blur(1px);
@@ -150,8 +147,8 @@ figure.quote {
   .twitchStream .twitchStream-title,
   .twitchStream .twitchStream-description {
     display: inline-block;
-    width: calc(320px - 50px - 1.5rem);
-    margin: .25rem .25rem 0 .25rem;
+    width: calc(315px - 50px - 30px);
+    margin: 5px 5px 0 5px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden; }
