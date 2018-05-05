@@ -112,6 +112,8 @@ figure.quote {
   display: flex;
   flex-wrap: wrap;
   margin: 1rem 0; }
+  .twitchStreams .loader {
+    margin: .5rem 0; }
 
 .twitchStream {
   width: 315px;
@@ -154,4 +156,32 @@ figure.quote {
     overflow: hidden; }
   .twitchStream .twitchStream-title {
     font-weight: 600; }
+
+.loader {
+  height: 4px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(33, 33, 33, 0.03);
+  border-radius: 2px; }
+
+.loader[hidden] {
+  display: block;
+  visibility: hidden; }
+
+.loader:before {
+  display: block;
+  position: absolute;
+  content: "";
+  left: -200px;
+  width: 200px;
+  height: 4px;
+  background-color: #ea005e;
+  animation: ltr 2s ease-in-out infinite; }
+
+@keyframes ltr {
+  from {
+    left: -200px; }
+  to {
+    left: 100%; } }
 

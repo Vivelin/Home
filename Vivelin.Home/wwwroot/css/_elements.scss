@@ -54,6 +54,10 @@ figure.quote {
     display: flex;
     flex-wrap: wrap;
     margin: 1rem 0;
+
+    .loader {
+        margin: .5rem 0;
+    }
 }
 
 .twitchStream {
