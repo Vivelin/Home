@@ -40,7 +40,10 @@ h5 {
 h6 {
   font-size: .83em; }
 
-blockquote footer {
+figcaption {
+  font-size: .8em; }
+
+footer {
   font-size: .8em; }
 
 html {
