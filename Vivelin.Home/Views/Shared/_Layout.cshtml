@@ -29,18 +29,38 @@
     </main>
 
     <footer>
-        <ul class="icon-list">
-            <li>
-                <a class="website icon" href="https://twitter.com/VivelinPrime" rel="external">
-                    <img src="~/images/icons/twitter.png" alt="@@VivelinPrime on Twitter" />
-                </a>
-            </li>
-            <li>
-                <a class="website icon" href="https://github.com/Vivelin" rel="external">
-                    <img src="~/images/icons/github.png" alt="Vivelin on GitHub" />
-                </a>
-            </li>
-        </ul>
+        <nav class="footerBar">
+            <section>
+                <ul class="icon-list">
+                    <li>
+                        <a class="website icon" href="https://twitter.com/VivelinPrime" rel="external">
+                            <img src="~/images/icons/twitter.png" alt="@@VivelinPrime on Twitter" />
+                        </a>
+                    </li>
+                    <li>
+                        <a class="website icon" href="https://github.com/Vivelin" rel="external">
+                            <img src="~/images/icons/github.png" alt="Vivelin on GitHub" />
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="returnUrl" value="/" />
+                        <p>Not @User.Identity.Name? <button class="link" type="submit">Log out</button></p>
+                    </form>
+                }
+                else
+                {
+                    <form action="/login" method="post">
+                        <input type="hidden" name="returnUrl" value="/" />
+                        <p><button class="link" type="submit">Connect using Twitch</button></p>
+                    </form>
+                }
+            </section>
+        </nav>
     </footer>
 
     @RenderSection("Scripts", required: false)

@@ -84,9 +84,28 @@ a:hover, a:active {
   border-radius: 2px;
   box-shadow: 0 0 2px black; }
 
+/* For buttons that behave like hyperlinks (e.g. POST form action that triggers a redirect) */
+button.link {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  color: #ea005e; }
+
+button.link:hover,
+button.link:active {
+  text-decoration: underline; }
+
+.footerBar {
+  display: flex; }
+
+.footerBar section {
+  margin-right: .5rem;
+  line-height: 32px; }
+
 ul.icon-list {
   list-style-type: none;
-  padding-left: 0; }
+  padding-left: 0;
+  overflow: hidden; }
   ul.icon-list li {
     float: left;
     margin-right: .5em; }

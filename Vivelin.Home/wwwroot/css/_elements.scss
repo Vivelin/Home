@@ -1,4 +1,5 @@
 ﻿$largeImage: 1.5em;
+$footerBarHeight: 32px;
 
 .with.image {
     line-height: $largeImage;
@@ -15,9 +16,33 @@
     box-shadow: 0 0 2px black;
 }
 
+/* For buttons that behave like hyperlinks (e.g. POST form action that triggers a redirect) */
+button.link {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+
+    color: $accentPrimary;
+}
+
+button.link:hover,
+button.link:active {
+    text-decoration: underline;
+}
+
+.footerBar {
+    display: flex;
+}
+
+.footerBar section {
+    margin-right: .5rem;
+    line-height: $footerBarHeight;
+}
+
 ul.icon-list {
     list-style-type: none;
     padding-left: 0;
+    overflow: hidden;
 
     li {
         float: left;
@@ -30,8 +55,8 @@ ul.icon-list {
 }
 
 .website.icon img {
-    width: 32px;
-    height: 32px;
+    width: $footerBarHeight;
+    height: $footerBarHeight;
     vertical-align: bottom;
     background-color: $accentPrimary;
 }
