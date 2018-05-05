@@ -107,6 +107,9 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     }
 
     componentDidMount() {
+        if (!this.props.userId || !this.props.accessToken)
+            return
+
         this.fetchUser()
         this.fetchStreams()
 

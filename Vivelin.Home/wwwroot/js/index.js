@@ -94,6 +94,8 @@ var TwitchFollows = (function (_super) {
     }
     TwitchFollows.prototype.componentDidMount = function () {
         var _this = this;
+        if (!this.props.userId || !this.props.accessToken)
+            return;
         this.fetchUser();
         this.fetchStreams();
         var id = window.setInterval(function () { return _this.fetchStreams(); }, this.props.reloadInterval);
