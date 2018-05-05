@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Vivelin.Home.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Vivelin.Home
 {
@@ -84,6 +85,18 @@ namespace Vivelin.Home
                 .GetResult();
 
             app.UseStaticFiles();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.Use((context, next) =>
+            {
+                context.Request.Scheme = "https";
+                return next();
+            });
+
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
