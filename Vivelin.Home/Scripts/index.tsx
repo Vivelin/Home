@@ -1,10 +1,13 @@
 ﻿interface TwitchFollowsProps {
     userId: string
     accessToken: string
+    reloadInterval: number
 }
 
 interface TwitchFollowsState {
     pendingRequests: number
+    reloadIntervalId: number
+
     user: Twitch.User
     streams: Twitch.Stream[]
     streamsUsers: Twitch.User[]
@@ -19,13 +22,21 @@ class LoadingIndicator extends React.Component<{ visible: boolean }> {
 }
 
 class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch.User }> {
-    render() {
+    public static SortByViewersDescending(a: Twitch.Stream, b: Twitch.Stream) {
+        return b.viewer_count - a.viewer_count
+    }
+
+    public static IsLive(value: Twitch.Stream) {
+        return value.type != 'vodcast'
+    }
+
+    public render() {
         if (!this.props.user) {
             return null
         }
 
         const streamUrl = 'https://www.twitch.tv/' + this.props.user.login
-        const thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360')
+        const thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360') + '#' + Date.now()
 
         return (
             <figure className='twitchStream'>
@@ -47,10 +58,10 @@ class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch
     private description() {
         const viewerCount = this.props.stream.viewer_count
         if (viewerCount === 0)
-            return this.uptime() + ', all alone'
+            return this.uptime() + ' by themselves'
         if (viewerCount === 1)
             return this.uptime() + ' for a lone soul'
-        return this.uptime() + ' for ' + viewerCount.toLocaleString() + ' viewers';
+        return this.uptime() + ' with ' + viewerCount.toLocaleString() + ' viewers';
     }
 
     private uptime() {
@@ -62,8 +73,8 @@ class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch
         const startedAt = new Date(this.props.stream.started_at)
         const elapsedMs = Date.now() - startedAt.getTime()
 
-        if (elapsedMs < 10 * minutes) {
-            return '🆕'
+        if (elapsedMs < 15 * minutes) {
+            return 'Going live'
         }
         else if (elapsedMs < 1.5 * hours) {
             const elapsedMinutes = elapsedMs / minutes
@@ -85,6 +96,8 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         super(props)
         this.state = {
             pendingRequests: 0,
+            reloadIntervalId: null,
+
             user: null,
             streams: null,
             streamsUsers: null,
@@ -96,6 +109,13 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     componentDidMount() {
         this.fetchUser()
         this.fetchStreams()
+
+        const id = window.setInterval(() => this.fetchStreams(), this.props.reloadInterval)
+        this.setState({ reloadIntervalId: id })
+    }
+
+    componentWillUnmount() {
+        window.clearInterval(this.state.reloadIntervalId)
     }
 
     render() {
@@ -113,10 +133,13 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
             <>
             <LoadingIndicator visible={this.state.pendingRequests > 0} />
             {
-                !isMissingData && this.state.streams.filter(x => x.type != 'vodcast').map((stream, index) => {
-                    const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
-                    return <TwitchStream key={index} user={user} stream={stream} />
-                })
+                !isMissingData && this.state.streams
+                    .sort(TwitchStream.SortByViewersDescending)
+                    .filter(TwitchStream.IsLive)
+                    .map((stream, index) => {
+                        const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
+                        return <TwitchStream key={index} user={user} stream={stream} />
+                    })
             }
             </>
         )
@@ -142,14 +165,14 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         const streamsUri = 'streams?user_id=' + response.data.map(x => x.to_id).join('&user_id=')
         this.sendRequest<Twitch.Stream>(streamsUri, response => {
             this.setState((prevState) => ({
-                streams: prevState.streams ? prevState.streams.concat(response.data) : response.data
+                streams: this.merge(prevState.streams, response.data, x => x.id)
             }))
         })
 
         const usersUri = 'users?id=' + response.data.map(x => x.to_id).join('&id=')
         this.sendRequest<Twitch.User>(usersUri, response => {
             this.setState((prevState) => ({
-                streamsUsers: prevState.streamsUsers ? prevState.streamsUsers.concat(response.data) : response.data
+                streamsUsers: this.merge(prevState.streamsUsers, response.data, x => x.id)
             }))
         })
 
@@ -180,6 +203,16 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         this.setState((prevState) => ({ pendingRequests: prevState.pendingRequests + 1 }));
         request.send()
     }
+
+    private merge<T>(oldValues: T[], newValues: T[], key: (value: T) => any): T[] {
+        if (!oldValues) {
+            return newValues
+        }
+
+        return oldValues
+            .filter(oldValue => !newValues.some(newValue => key(newValue) === key(oldValue)))
+            .concat(newValues)
+    }
 }
 
 {
@@ -187,6 +220,6 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     if (container) {
         const userId = container.dataset.userId
         const accessToken = container.dataset.accessToken
-        ReactDOM.render(<TwitchFollows userId={userId} accessToken={accessToken} />, container)
+        ReactDOM.render(<TwitchFollows reloadInterval={30000} userId={userId} accessToken={accessToken} />, container)
     }
 }

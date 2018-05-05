@@ -23,12 +23,18 @@ var TwitchStream = (function (_super) {
     function TwitchStream() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    TwitchStream.SortByViewersDescending = function (a, b) {
+        return b.viewer_count - a.viewer_count;
+    };
+    TwitchStream.IsLive = function (value) {
+        return value.type != 'vodcast';
+    };
     TwitchStream.prototype.render = function () {
         if (!this.props.user) {
             return null;
         }
         var streamUrl = 'https://www.twitch.tv/' + this.props.user.login;
-        var thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360');
+        var thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360') + '#' + Date.now();
         return (React.createElement("figure", { className: 'twitchStream' },
             React.createElement("a", { href: streamUrl, target: '_blank', rel: 'external' },
                 React.createElement("img", { src: thumbnailUrl, alt: this.props.stream.title, className: 'twitchStream-thumbnail' })),
@@ -41,10 +47,10 @@ var TwitchStream = (function (_super) {
     TwitchStream.prototype.description = function () {
         var viewerCount = this.props.stream.viewer_count;
         if (viewerCount === 0)
-            return this.uptime() + ', all alone';
+            return this.uptime() + ' by themselves';
         if (viewerCount === 1)
             return this.uptime() + ' for a lone soul';
-        return this.uptime() + ' for ' + viewerCount.toLocaleString() + ' viewers';
+        return this.uptime() + ' with ' + viewerCount.toLocaleString() + ' viewers';
     };
     TwitchStream.prototype.uptime = function () {
         var seconds = 1000;
@@ -53,8 +59,8 @@ var TwitchStream = (function (_super) {
         var days = 24 * hours;
         var startedAt = new Date(this.props.stream.started_at);
         var elapsedMs = Date.now() - startedAt.getTime();
-        if (elapsedMs < 10 * minutes) {
-            return '🆕';
+        if (elapsedMs < 15 * minutes) {
+            return 'Going live';
         }
         else if (elapsedMs < 1.5 * hours) {
             var elapsedMinutes = elapsedMs / minutes;
@@ -77,6 +83,7 @@ var TwitchFollows = (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             pendingRequests: 0,
+            reloadIntervalId: null,
             user: null,
             streams: null,
             streamsUsers: null,
@@ -86,8 +93,14 @@ var TwitchFollows = (function (_super) {
         return _this;
     }
     TwitchFollows.prototype.componentDidMount = function () {
+        var _this = this;
         this.fetchUser();
         this.fetchStreams();
+        var id = window.setInterval(function () { return _this.fetchStreams(); }, this.props.reloadInterval);
+        this.setState({ reloadIntervalId: id });
+    };
+    TwitchFollows.prototype.componentWillUnmount = function () {
+        window.clearInterval(this.state.reloadIntervalId);
     };
     TwitchFollows.prototype.render = function () {
         var _this = this;
@@ -103,7 +116,10 @@ var TwitchFollows = (function (_super) {
         }
         return (React.createElement(React.Fragment, null,
             React.createElement(LoadingIndicator, { visible: this.state.pendingRequests > 0 }),
-            !isMissingData && this.state.streams.filter(function (x) { return x.type != 'vodcast'; }).map(function (stream, index) {
+            !isMissingData && this.state.streams
+                .sort(TwitchStream.SortByViewersDescending)
+                .filter(TwitchStream.IsLive)
+                .map(function (stream, index) {
                 var user = _this.state.streamsUsers.filter(function (x) { return x.id === stream.user_id; })[0];
                 return React.createElement(TwitchStream, { key: index, user: user, stream: stream });
             })));
@@ -128,13 +144,13 @@ var TwitchFollows = (function (_super) {
         var streamsUri = 'streams?user_id=' + response.data.map(function (x) { return x.to_id; }).join('&user_id=');
         this.sendRequest(streamsUri, function (response) {
             _this.setState(function (prevState) { return ({
-                streams: prevState.streams ? prevState.streams.concat(response.data) : response.data
+                streams: _this.merge(prevState.streams, response.data, function (x) { return x.id; })
             }); });
         });
         var usersUri = 'users?id=' + response.data.map(function (x) { return x.to_id; }).join('&id=');
         this.sendRequest(usersUri, function (response) {
             _this.setState(function (prevState) { return ({
-                streamsUsers: prevState.streamsUsers ? prevState.streamsUsers.concat(response.data) : response.data
+                streamsUsers: _this.merge(prevState.streamsUsers, response.data, function (x) { return x.id; })
             }); });
         });
         if (response.pagination) {
@@ -162,6 +178,14 @@ var TwitchFollows = (function (_super) {
         this.setState(function (prevState) { return ({ pendingRequests: prevState.pendingRequests + 1 }); });
         request.send();
     };
+    TwitchFollows.prototype.merge = function (oldValues, newValues, key) {
+        if (!oldValues) {
+            return newValues;
+        }
+        return oldValues
+            .filter(function (oldValue) { return !newValues.some(function (newValue) { return key(newValue) === key(oldValue); }); })
+            .concat(newValues);
+    };
     return TwitchFollows;
 }(React.Component));
 {
@@ -169,7 +193,7 @@ var TwitchFollows = (function (_super) {
     if (container) {
         var userId = container.dataset.userId;
         var accessToken = container.dataset.accessToken;
-        ReactDOM.render(React.createElement(TwitchFollows, { userId: userId, accessToken: accessToken }), container);
+        ReactDOM.render(React.createElement(TwitchFollows, { reloadInterval: 30000, userId: userId, accessToken: accessToken }), container);
     }
 }
 //# sourceMappingURL=index.js.map

@@ -28,7 +28,7 @@
         type: '' | 'staff' | 'admin' | 'global_mod'
 
         /** Total number of views of the user’s channel. */
-        view_count: Number
+        view_count: number
     }
 
     interface Follow {
@@ -50,7 +50,7 @@
          * - If only `to_id` was in the request, this is the total number of followers.
          * - If both `from_id` and `to_id` were in the request, this is 1 (if the “from” user follows the “to” user) or 0. 
          */
-        total: Number
+        total: number
     }
 
     interface Stream {
@@ -82,7 +82,7 @@
         user_id: string
 
         /** Number of viewers watching the stream at the time of the query. */
-        viewer_count: Number
+        viewer_count: number
     }
 
     interface Game {
@@ -99,7 +99,7 @@
     interface Response<T> {
         data?: T[]
         error?: string
-        status?: Number
+        status?: number
         message?: string
 
         /** A cursor value, to be used in a subsequent request to specify the starting point of the next set of results. */
