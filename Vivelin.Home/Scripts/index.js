@@ -47,7 +47,7 @@ var TwitchStream = (function (_super) {
     TwitchStream.prototype.description = function () {
         var viewerCount = this.props.stream.viewer_count;
         if (viewerCount === 0)
-            return this.uptime() + ' by themselves';
+            return this.uptime() + ' alone';
         if (viewerCount === 1)
             return this.uptime() + ' for a lone soul';
         return this.uptime() + ' with ' + viewerCount.toLocaleString() + ' viewers';

@@ -46,6 +46,7 @@ namespace Vivelin.Home
             {
                 options.LoginPath = "/login";
                 options.LogoutPath = "/logout";
+                options.ExpireTimeSpan = TimeSpan.FromHours(1);
             })
             .AddTwitch(options =>
             {

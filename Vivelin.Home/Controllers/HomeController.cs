@@ -19,12 +19,11 @@ namespace Vivelin.Home.Controllers
 
         [HttpGet("~/")]
         public async Task<IActionResult> Index()
-        {
-            var authentication = await HttpContext.AuthenticateAsync();
-            if (authentication.Succeeded)
+        {            
+            if (User.Identity.IsAuthenticated)
             {
                 ViewBag.UserId = User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-                ViewBag.AccessToken = authentication.Properties?.GetTokenValue("access_token");
+                ViewBag.AccessToken = await HttpContext.GetTokenAsync("access_token");
             }
 
             var viewModel = new HomeViewModel
