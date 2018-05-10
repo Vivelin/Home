@@ -92,7 +92,7 @@ namespace Vivelin.Home
             app.UseResponseHeaders(options =>
             {
                 options
-                    .AddXssProtection("1; mode=block")
+                    .AddXssProtection(block: true)
                     .AddReferrerPolicy("strict-origin")
                     .AddContentSecurityPolicy("default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
             });
