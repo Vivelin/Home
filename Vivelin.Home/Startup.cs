@@ -89,12 +89,13 @@ namespace Vivelin.Home
             app.UseStaticFiles();
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto });
-
-            var responseHeaders = new ResponseHeadersOptions();
-            responseHeaders.Headers.Add("X-XSS-Protection", "1; mode=block");
-            responseHeaders.Headers.Add("Referrer-Policy", "strict-origin");
-            responseHeaders.Headers.Add("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
-            app.UseResponseHeaders(responseHeaders);
+            app.UseResponseHeaders(options =>
+            {
+                options
+                    .Add("X-XSS-Protection", "1; mode=block")
+                    .Add("Referrer-Policy", "strict-origin")
+                    .Add("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
+            });
 
             app.Use((context, next) =>
             {
