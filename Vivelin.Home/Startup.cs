@@ -95,6 +95,9 @@ namespace Vivelin.Home
             app.Use((context, next) =>
             {
                 context.Request.Scheme = "https";
+                context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+                context.Response.Headers.Add("Referrer-Policy", "strict-origin");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
                 return next();
             });
 
