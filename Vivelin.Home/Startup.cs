@@ -92,9 +92,9 @@ namespace Vivelin.Home
             app.UseResponseHeaders(options =>
             {
                 options
-                    .Add("X-XSS-Protection", "1; mode=block")
-                    .Add("Referrer-Policy", "strict-origin")
-                    .Add("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
+                    .AddXssProtection("1; mode=block")
+                    .AddReferrerPolicy("strict-origin")
+                    .AddContentSecurityPolicy("default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
             });
 
             app.Use((context, next) =>
