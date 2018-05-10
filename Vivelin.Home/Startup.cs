@@ -12,6 +12,7 @@ using Vivelin.Home.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.HttpOverrides;
+using Vivelin.AspNetCore.Headers;
 
 namespace Vivelin.Home
 {
@@ -87,27 +88,29 @@ namespace Vivelin.Home
 
             app.UseStaticFiles();
 
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
+            app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto });
+
+            var responseHeaders = new ResponseHeadersOptions();
+            responseHeaders.Headers.Add("X-XSS-Protection", "1; mode=block");
+            responseHeaders.Headers.Add("Referrer-Policy", "strict-origin");
+            responseHeaders.Headers.Add("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
+            app.UseResponseHeaders(responseHeaders);
 
             app.Use((context, next) =>
             {
                 context.Request.Scheme = "https";
-                context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
-                context.Response.Headers.Add("Referrer-Policy", "strict-origin");
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
                 return next();
             });
 
             app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc(ConfigureRoutes);
+        }
+
+        private static void ConfigureRoutes(Microsoft.AspNetCore.Routing.IRouteBuilder routes)
+        {
+            routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
         }
 
         private async Task ConfigureDbContextMigrationsAsync(IApplicationBuilder app)

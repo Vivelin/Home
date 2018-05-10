@@ -42,6 +42,9 @@
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vivelin.AspNetCore.Headers\Vivelin.AspNetCore.Headers.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.tsx" />
     <TypeScriptCompile Include="Scripts\twitch.d.ts" />
   </ItemGroup>
