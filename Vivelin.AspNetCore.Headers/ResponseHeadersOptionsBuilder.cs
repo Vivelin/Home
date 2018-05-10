@@ -14,9 +14,9 @@ namespace Vivelin.AspNetCore.Headers
             options = new ResponseHeadersOptions();
         }
 
-        public ResponseHeadersOptionsBuilder Add(string name, StringValues values)
+        public ResponseHeadersOptionsBuilder Add(string name, StringValues value)
         {
-            options.Headers.Add(name, values);
+            options.Headers.Add(name, value);
             return this;
         }
 
