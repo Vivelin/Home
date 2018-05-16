@@ -40,12 +40,12 @@ class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch
 
         return (
             <figure className='twitchStream'>
-                <a href={streamUrl} target='_blank' rel='external'>
+                <a href={streamUrl} rel='external'>
                     <img src={thumbnailUrl} alt={this.props.stream.title} className='twitchStream-thumbnail' />
                 </a>
 
                 <figcaption className='overlay'>
-                    <a href={streamUrl} target='_blank' rel='external'>
+                    <a href={streamUrl} rel='external'>
                         <img src={this.props.user.profile_image_url} alt={this.props.user.display_name} title={this.props.user.display_name} className='twitchStream-profileImage' />
                         <b className='twitchStream-title' title={this.props.stream.title}>{this.props.stream.title}</b>
                         <span className='twitchStream-description'>{this.description()}</span>
