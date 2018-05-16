@@ -259,4 +259,16 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+## Project-specific 
 /Vivelin.Home/home.db
+
+# Generated output files
+/Vivelin.Home/wwwroot/lib/**/*
+/Vivelin.Home/wwwroot/js/**/*
+/Vivelin.Home/wwwroot/css/**/*.css
+/Vivelin.Home/wwwroot/css/**/*.css
+
+# TypeScript output
+/Vivelin.Home/[Ss]cripts/**/*.js
+/Vivelin.Home/[Ss]cripts/**/*.js.map
