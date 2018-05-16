@@ -38,7 +38,7 @@ var TwitchStream = (function (_super) {
         return (React.createElement("figure", { className: 'twitchStream' },
             React.createElement("a", { href: streamUrl, target: '_blank', rel: 'external' },
                 React.createElement("img", { src: thumbnailUrl, alt: this.props.stream.title, className: 'twitchStream-thumbnail' })),
-            React.createElement("figcaption", null,
+            React.createElement("figcaption", { className: 'overlay' },
                 React.createElement("a", { href: streamUrl, target: '_blank', rel: 'external' },
                     React.createElement("img", { src: this.props.user.profile_image_url, alt: this.props.user.display_name, title: this.props.user.display_name, className: 'twitchStream-profileImage' }),
                     React.createElement("b", { className: 'twitchStream-title', title: this.props.stream.title }, this.props.stream.title),

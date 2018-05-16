@@ -32,6 +32,11 @@ body {
     margin: 1em;
 }
 
+:focus {
+    box-shadow: 0 0 1px 1px $accentPrimary;
+    outline: 1px solid $accentPrimary;
+}
+
 body > header,
 body > main,
 body > footer {

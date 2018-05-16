@@ -53,6 +53,10 @@ html {
 body {
   margin: 1em; }
 
+:focus {
+  box-shadow: 0 0 1px 1px #ea005e;
+  outline: 1px solid #ea005e; }
+
 body > header,
 body > main,
 body > footer {
@@ -130,6 +134,13 @@ figure.quote {
   figure.quote figcaption:before {
     content: '—'; }
 
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  overflow: hidden; }
+
 .twitchStreams {
   display: flex;
   flex-wrap: wrap;
@@ -149,16 +160,11 @@ figure.quote {
   .twitchStream figcaption {
     height: 50px;
     font-size: .8rem;
-    color: white;
     position: relative;
     top: -177.1875px;
-    margin: 5px;
     padding: 5px;
-    margin-top: 0;
+    margin-top: -5px;
     /* For some reason, there's an extra ~5px margin on top */
-    background: rgba(0, 0, 0, 0.6);
-    -webkit-backdrop-filter: blur(1px);
-    backdrop-filter: blur(1px);
     overflow: hidden; }
   .twitchStream figcaption > a {
     display: block;
