@@ -2,42 +2,121 @@
 
 namespace Vivelin.AspNetCore.Headers
 {
+    /// <summary>
+    /// Provides an API for configuring a Content Security Policy.
+    /// </summary>
     public class ContentSecurityPolicyBuilder
     {
-        public ContentSecurityPolicyDirectiveBuilder ChildSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("child-src");
-        public ContentSecurityPolicyDirectiveBuilder ConnectSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("connect-src");
-        public ContentSecurityPolicyDirectiveBuilder DefaultSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("default-src");
-        public ContentSecurityPolicyDirectiveBuilder FontSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("font-src");
-        public ContentSecurityPolicyDirectiveBuilder FrameSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("frame-src");
-        public ContentSecurityPolicyDirectiveBuilder ImageSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("img-src");
-        public ContentSecurityPolicyDirectiveBuilder ManifectSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("manifest-src");
-        public ContentSecurityPolicyDirectiveBuilder MediaSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("media-src");
-        public ContentSecurityPolicyDirectiveBuilder ObjectSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("object-src");
-        public ContentSecurityPolicyDirectiveBuilder ScriptSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("script-src");
-        public ContentSecurityPolicyDirectiveBuilder StyleSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("style-src");
-        public ContentSecurityPolicyDirectiveBuilder WorkerSrc { get; } = new ContentSecurityPolicyDirectiveBuilder("worker-src");
+        /// <summary>
+        /// Controls requests which will populate a frame (e.g.
+        /// <c>&lt;iframe&gt;</c> and <c>&lt;frame&gt;</c>) or a worker.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder ChildSrc { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("child-src");
 
-        public static implicit operator ContentSecurityPolicyDirective[](ContentSecurityPolicyBuilder builder)
+        /// <summary>
+        /// Restricts the URLs which can be loaded using script interfaces. This
+        /// includes APIs like <c>fetch()</c>, XHR, <c>&lt;a&gt;</c>’s <c>ping</c>
+        /// as well as WebSocket connections.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Fetch { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("connect-src");
+
+        /// <summary>
+        /// Controls requests for which no other directives are specified.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Default { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("default-src");
+
+        /// <summary>
+        /// Restricts the URLs from which font resources may be loaded.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Fonts { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("font-src");
+
+        /// <summary>
+        /// Restricts the URLs which may be loaded into nested browsing contexts.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Frames { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("frame-src");
+
+        /// <summary>
+        /// Restricts the URLs from which image resources may be loaded.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Images { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("img-src");
+
+        /// <summary>
+        /// Restricts the URLs from which application manifects may be loaded.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Manifests { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("manifest-src");
+
+        /// <summary>
+        /// Restricts the URLs from which video, audio and associated resources
+        /// may be loaded.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Media { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("media-src");
+
+        /// <summary>
+        /// Restricts the URLs from which plugin content may be loaded.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Objects { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("object-src");
+
+        /// <summary>
+        /// Restricts the URLs from which scripts may be executed.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Scripts { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("script-src");
+
+        /// <summary>
+        /// Restricts the locations from which style may be applied to a document.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Styles { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("style-src");
+
+        /// <summary>
+        /// Restricts the URLs which may be loaded as a worker, shared worker or
+        /// service worker.
+        /// </summary>
+        public ContentSecurityPolicyDirectiveBuilder Workers { get; }
+            = new ContentSecurityPolicyDirectiveBuilder("worker-src");
+
+        /// <summary>
+        /// Returns the directives constructed by the specified builder.
+        /// </summary>
+        /// <param name="builder">
+        /// A <see cref="ContentSecurityPolicyBuilder"/> whose directives to return.
+        /// </param>
+        public static implicit operator ContentSecurityPolicyDirective[] (ContentSecurityPolicyBuilder builder)
         {
             return builder.Build();
         }
 
+        /// <summary>
+        /// Returns a collection of the directives constructed by the <see cref="ContentSecurityPolicyBuilder"/>.
+        /// </summary>
+        /// <returns>
+        /// An array of <see cref="ContentSecurityPolicyDirective"/> objects.
+        /// </returns>
         protected internal ContentSecurityPolicyDirective[] Build()
         {
             return new ContentSecurityPolicyDirective[]
             {
                 ChildSrc,
-                ConnectSrc,
-                DefaultSrc,
-                FontSrc,
-                FrameSrc,
-                ImageSrc,
-                ManifectSrc,
-                MediaSrc,
-                ObjectSrc,
-                ScriptSrc,
-                StyleSrc,
-                WorkerSrc
+                Fetch,
+                Default,
+                Fonts,
+                Frames,
+                Images,
+                Manifests,
+                Media,
+                Objects,
+                Scripts,
+                Styles,
+                Workers
             };
         }
     }
