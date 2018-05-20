@@ -94,7 +94,23 @@ namespace Vivelin.Home
                 options
                     .AddXssProtection(block: true)
                     .AddReferrerPolicy(ReferrerPolicy.StrictOrigin)
-                    .AddContentSecurityPolicy("default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
+                    .AddContentSecurityPolicy(csp =>
+                    {
+                        csp.DefaultSrc
+                            .AllowFromSelf();
+                        csp.StyleSrc
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://fonts.googleapis.com");
+                        csp.FontSrc
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://fonts.gstatic.com");
+                        csp.ConnectSrc
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://api.twitch.tv");
+                        csp.ImageSrc
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://static-cdn.jtvnw.net");
+                    });
             });
 
             app.Use((context, next) =>
