@@ -29,7 +29,7 @@ namespace Vivelin.Home.Data
             {
                 Quotes.Add(new Quote
                 {
-                    Text = "<q>I speak metaphorically, my lord,</q> he said. Russ nodded, still amused. <q>That’s all right, Constantin. Sometimes I dismember metaphorically.</q>",
+                    Text = "<q>I speak metaphorically, my lord,</q> he said.<br>Russ nodded, still amused.<br><q>That’s all right, Constantin. Sometimes I dismember metaphorically.</q>",
                     Citation = "Dan Abnett. <cite>Prospero Burns</cite> (Black Library, 2014), 331."
                 });
 
@@ -91,6 +91,12 @@ namespace Vivelin.Home.Data
                 {
                     Text = "User alert! Main reactor shut down in accordance with emergency containment procedures. Manual restart required.",
                     Citation = "<cite>Mass Effect</cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "Guilliman nods. The nod means shut up. Thiel shuts up.",
+                    Citation = "Dan Abnett. <cite>Know No Fear</cite> (Black Library, 2016), 94."
                 });
 
                 await SaveChangesAsync();
