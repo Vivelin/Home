@@ -2,9 +2,9 @@
 {
     public static class ReferrerPolicyExtensions
     {
-        public static ResponseHeadersOptionsBuilder AddReferrerPolicy(this ResponseHeadersOptionsBuilder builder, params string[] values)
+        public static ResponseHeadersOptionsBuilder AddReferrerPolicy(this ResponseHeadersOptionsBuilder builder, ReferrerPolicy referrerPolicy)
         {
-            return builder.Add("Referrer-Policy", values);
+            return builder.Add("Referrer-Policy", referrerPolicy.ToString());
         }
     }
 }
