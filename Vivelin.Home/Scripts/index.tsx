@@ -22,8 +22,12 @@ class LoadingIndicator extends React.Component<{ visible: boolean }> {
 }
 
 class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch.User }> {
-    public static SortByViewersDescending(a: Twitch.Stream, b: Twitch.Stream) {
+    public static SortByViewersDescending(a: Twitch.Stream, b: Twitch.Stream): number {
         return b.viewer_count - a.viewer_count
+    }
+
+    public static SortByStartDateDescending(a: Twitch.Stream, b: Twitch.Stream): number {
+        return Date.parse(b.started_at) - Date.parse(a.started_at)
     }
 
     public static IsLive(value: Twitch.Stream) {
@@ -125,10 +129,6 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers)
 
         if (isMissingData && this.state.errorName) {
-            if (this.state.errorName === 'Unauthorized') {
-                return null
-            }
-
             return <p>{this.state.errorName}: {this.state.errorMessage}</p>
         }
 
@@ -137,7 +137,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
             <LoadingIndicator visible={this.state.pendingRequests > 0} />
             {
                 !isMissingData && this.state.streams
-                    .sort(TwitchStream.SortByViewersDescending)
+                    .sort(TwitchStream.SortByStartDateDescending)
                     .filter(TwitchStream.IsLive)
                     .map((stream, index) => {
                         const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
