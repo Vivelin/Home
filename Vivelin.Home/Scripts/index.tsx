@@ -127,7 +127,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
 
     render() {
         const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers)
-        
+
         if (this.state.errorName) {
             return <p>{this.state.errorName}: {this.state.errorMessage}</p>
         }
@@ -137,21 +137,25 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         }
 
         if (this.state.pendingRequests === 0 && this.state.streams.length == 0) {
-            return <p>Nobody you’re following on Twitch is currently live. Maybe there’s something new on <a href='https://www.youtube.com/feed/subscriptions/activity' rel='external'>YouTube</a>?</p>
+            return <RandomElement>
+                <p>Nobody you’re following on Twitch is currently live.</p>
+                <p className='with image'>Maybe there’s something on <a href='https://www.youtube.com/feed/subscriptions/activity' rel='external'>YouTube</a>? <img src='https://static-cdn.jtvnw.net/emoticons/v1/904875/3.0' alt='rooShrug' /></p>
+                <p className='with image'><img src='https://static-cdn.jtvnw.net/emoticons/v1/904819/3.0' alt='rooBlank' /></p>
+            </RandomElement>
         }
 
         return (
             <>
-            <LoadingIndicator visible={this.state.pendingRequests > 0} />
-            {
-                this.state.streams
-                    .sort(TwitchStream.SortByStartDateDescending)
-                    .filter(TwitchStream.IsLive)
-                    .map((stream, index) => {
-                        const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
-                        return <TwitchStream key={index} user={user} stream={stream} />
-                    })
-            }
+                <LoadingIndicator visible={this.state.pendingRequests > 0} />
+                {
+                    this.state.streams
+                        .sort(TwitchStream.SortByStartDateDescending)
+                        .filter(TwitchStream.IsLive)
+                        .map((stream, index) => {
+                            const user = this.state.streamsUsers.filter(x => x.id === stream.user_id)[0]
+                            return <TwitchStream key={index} user={user} stream={stream} />
+                        })
+                }
             </>
         )
     }
