@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Vivelin.AspNetCore.Headers;
 using Vivelin.Home.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Vivelin.Home
 {
@@ -35,7 +33,8 @@ namespace Vivelin.Home
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services
+        // to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(options =>
@@ -64,7 +63,8 @@ namespace Vivelin.Home
             services.AddSingleton<IConfiguration>(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This method gets called by the runtime. Use this method to configure
+        // the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -87,27 +87,46 @@ namespace Vivelin.Home
 
             app.UseStaticFiles();
 
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto });
+            app.UseResponseHeaders(options =>
             {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                options
+                    .AddXssProtection(block: true)
+                    .AddReferrerPolicy(ReferrerPolicy.StrictOrigin)
+                    .AddContentSecurityPolicy(csp =>
+                    {
+                        csp.Default
+                            .AllowFromSelf();
+                        csp.Styles
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://fonts.googleapis.com");
+                        csp.Fonts
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://fonts.gstatic.com");
+                        csp.Fetch
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://api.twitch.tv");
+                        csp.Images
+                            .AllowFromSelf()
+                            .AllowFromOrigin("https://static-cdn.jtvnw.net");
+                    });
             });
 
             app.Use((context, next) =>
             {
                 context.Request.Scheme = "https";
-                context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
-                context.Response.Headers.Add("Referrer-Policy", "strict-origin");
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.twitch.tv; img-src 'self' https://static-cdn.jtvnw.net");
                 return next();
             });
 
             app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc(ConfigureRoutes);
+        }
+
+        private static void ConfigureRoutes(Microsoft.AspNetCore.Routing.IRouteBuilder routes)
+        {
+            routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
         }
 
         private async Task ConfigureDbContextMigrationsAsync(IApplicationBuilder app)
