@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 
 namespace Vivelin.AspNetCore.Headers
 {
+    /// <summary>
+    /// Represents a set of HTTP headers in a request or response.
+    /// </summary>
     public class HeaderDictionary : Dictionary<string, StringValues>, IHeaderDictionary
     {
         /// <summary>
