@@ -136,7 +136,7 @@ figure.quote {
     .twitchStream-title,
     .twitchStream-description {
         display: inline-block;
-        width: calc(#{$width} - #{$headerSize} - #{$spacing * 6});
+        width: calc(#{$width} - #{$headerSize} - #{$spacing * 4});
         margin: $spacing $spacing 0 $spacing;
         white-space: nowrap;
         text-overflow: ellipsis;

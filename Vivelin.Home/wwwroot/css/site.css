@@ -177,7 +177,7 @@ figure.quote {
   .twitchStream .twitchStream-title,
   .twitchStream .twitchStream-description {
     display: inline-block;
-    width: calc(315px - 50px - 30px);
+    width: calc(315px - 50px - 20px);
     margin: 5px 5px 0 5px;
     white-space: nowrap;
     text-overflow: ellipsis;
