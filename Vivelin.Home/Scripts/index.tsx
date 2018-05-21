@@ -127,16 +127,24 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
 
     render() {
         const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers)
-
-        if (isMissingData && this.state.errorName) {
+        
+        if (this.state.errorName) {
             return <p>{this.state.errorName}: {this.state.errorMessage}</p>
+        }
+
+        if (isMissingData) {
+            return <LoadingIndicator visible={this.state.pendingRequests > 0} />
+        }
+
+        if (this.state.pendingRequests === 0 && this.state.streams.length == 0) {
+            return <p>Nobody you’re following on Twitch is currently live. Maybe there’s something new on <a href='https://www.youtube.com/feed/subscriptions/activity' rel='external'>YouTube</a>?</p>
         }
 
         return (
             <>
             <LoadingIndicator visible={this.state.pendingRequests > 0} />
             {
-                !isMissingData && this.state.streams
+                this.state.streams
                     .sort(TwitchStream.SortByStartDateDescending)
                     .filter(TwitchStream.IsLive)
                     .map((stream, index) => {
