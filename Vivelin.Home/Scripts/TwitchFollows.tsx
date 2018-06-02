@@ -1,101 +1,71 @@
-﻿interface TwitchFollowsProps {
+﻿/**
+ * Contains properties for the TwitchFollows class.
+ */
+interface TwitchFollowsProps {
+    /**
+     * The user ID of the Twitch user whose followed channels to display.
+     */
     userId: string
+
+    /**
+     * A Twitch OAuth access token used to access the Twitch API.
+     */
     accessToken: string
+
+    /**
+     * The number of seconds between each reload of the Twitch API data.
+     */
     reloadInterval: number
 }
 
+/**
+ * Contains the state for the TwitchFollows class.
+ */
 interface TwitchFollowsState {
+    /**
+     * The number of API requests that have not completed yet.
+     */
     pendingRequests: number
+
+    /**
+     * The ID of the interval timer that reloads the Twitch API data.
+     */
     reloadIntervalId: number
 
+    /**
+     * The logged-in Twitch user whose followed channels are displayed.
+     */
     user: Twitch.User
+
+    /**
+     * A collection of the streams to display.
+     */
     streams: Twitch.Stream[]
+
+    /**
+     * A collection of the followed users who are currently streaming.
+     */
     streamsUsers: Twitch.User[]
+
+    /**
+     * The name of the Twitch API error, if any.
+     */
     errorName: string
+
+    /**
+     * The Twitch API error message, if any.
+     */
     errorMessage: string
 }
 
-class LoadingIndicator extends React.Component<{ visible: boolean }> {
-    render() {
-        return <div className='loader' hidden={!this.props.visible} ></div>
-    }
-}
-
-class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch.User }> {
-    public static SortByViewersDescending(a: Twitch.Stream, b: Twitch.Stream): number {
-        return b.viewer_count - a.viewer_count
-    }
-
-    public static SortByStartDateDescending(a: Twitch.Stream, b: Twitch.Stream): number {
-        return Date.parse(b.started_at) - Date.parse(a.started_at)
-    }
-
-    public static IsLive(value: Twitch.Stream) {
-        return value.type != 'vodcast'
-    }
-
-    public render() {
-        if (!this.props.user) {
-            return null
-        }
-
-        const streamUrl = 'https://www.twitch.tv/' + this.props.user.login
-        const thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360') + '#' + Date.now()
-
-        return (
-            <figure className='twitchStream'>
-                <a href={streamUrl} rel='external'>
-                    <img src={thumbnailUrl} alt={this.props.stream.title} className='twitchStream-thumbnail' />
-                </a>
-
-                <figcaption className='overlay'>
-                    <a href={streamUrl} rel='external'>
-                        <img src={this.props.user.profile_image_url} alt={this.props.user.display_name} title={this.props.user.display_name} className='twitchStream-profileImage' />
-                        <b className='twitchStream-title' title={this.props.stream.title}>{this.props.stream.title}</b>
-                        <span className='twitchStream-description'>{this.description()}</span>
-                    </a>
-                </figcaption>
-            </figure>
-        )
-    }
-
-    private description() {
-        const viewerCount = this.props.stream.viewer_count
-        if (viewerCount === 0)
-            return this.uptime() + ' alone'
-        if (viewerCount === 1)
-            return this.uptime() + ' for a lone soul'
-        return this.uptime() + ' with ' + viewerCount.toLocaleString() + ' viewers';
-    }
-
-    private uptime() {
-        const seconds = 1000
-        const minutes = 60 * seconds
-        const hours = 60 * minutes
-        const days = 24 * hours // Probably overkill
-
-        const startedAt = new Date(this.props.stream.started_at)
-        const elapsedMs = Date.now() - startedAt.getTime()
-
-        if (elapsedMs < 15 * minutes) {
-            return 'Going live'
-        }
-        else if (elapsedMs < 1.5 * hours) {
-            const elapsedMinutes = elapsedMs / minutes
-            return Math.round(elapsedMinutes) + 'm'
-        }
-        else if (elapsedMs < 1.5 * days) {
-            const elapsedHours = elapsedMs / hours
-            return Math.round(elapsedHours) + 'h'
-        }
-        else {
-            const elapsedDays = elapsedMs / days;
-            return '~' + Math.round(elapsedDays) + 'd'
-        }
-    }
-}
-
+/**
+ * Shows the live Twitch channels followed by the logged-in user.
+ */
 class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsState> {
+    /**
+     * Initializes a new instance of the TwitchFollows component with the specified props.
+     * @param props The properties to initialize the class with.
+     */
     constructor(props: TwitchFollowsProps) {
         super(props)
         this.state = {
@@ -110,6 +80,9 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         }
     }
 
+    /**
+     * Occurs after the component has been placed in the DOM.
+     */
     componentDidMount() {
         if (!this.props.userId || !this.props.accessToken)
             return
@@ -121,10 +94,16 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
         this.setState({ reloadIntervalId: id })
     }
 
+    /**
+     * Occurs before the component will be removed from the DOM.
+     */
     componentWillUnmount() {
         window.clearInterval(this.state.reloadIntervalId)
     }
 
+    /**
+     * Updates the component.
+     */
     render() {
         const isMissingData = (!this.state.user || !this.state.streams || !this.state.streamsUsers)
 

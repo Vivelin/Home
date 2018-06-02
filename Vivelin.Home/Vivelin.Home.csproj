@@ -12,9 +12,11 @@
 
   <ItemGroup>
     <None Remove="home.db" />
-    <None Remove="Scripts\index.tsx" />
+    <None Remove="Scripts\LoadingIndicator.tsx" />
     <None Remove="Scripts\RandomElement.tsx" />
     <None Remove="Scripts\twitch.d.ts" />
+    <None Remove="Scripts\TwitchFollows.tsx" />
+    <None Remove="Scripts\TwitchStream.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,8 +48,10 @@
     <ProjectReference Include="..\Vivelin.AspNetCore.Headers\Vivelin.AspNetCore.Headers.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.tsx" />
+    <TypeScriptCompile Include="Scripts\TwitchFollows.tsx" />
+    <TypeScriptCompile Include="Scripts\LoadingIndicator.tsx" />
     <TypeScriptCompile Include="Scripts\RandomElement.tsx" />
-    <TypeScriptCompile Include="Scripts\twitch.d.ts" />
+    <TypeScriptCompile Include="Scripts\Twitch.d.ts" />
+    <TypeScriptCompile Include="Scripts\TwitchStream.tsx" />
   </ItemGroup>
 </Project>
