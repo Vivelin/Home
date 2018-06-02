@@ -172,6 +172,7 @@ figure.quote {
     background-color: #b90000;
     color: white;
 
+
     a {
         color: white;
     }
@@ -179,4 +180,11 @@ figure.quote {
     a:hover {
         text-decoration: none;
     }
+}
+
+.lastfmIcon {
+    fill: currentColor;
+    position: relative;
+    top: 6px;
+    margin-top: -10px;
 }

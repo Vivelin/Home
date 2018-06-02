@@ -215,6 +215,12 @@ figure.quote {
   .status--lastfm a:hover {
     text-decoration: none; }
 
+.lastfmIcon {
+  fill: currentColor;
+  position: relative;
+  top: 6px;
+  margin-top: -10px; }
+
 .loader {
   height: 4px;
   width: 100%;
