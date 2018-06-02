@@ -185,6 +185,18 @@ figure.quote {
   .twitchStream .twitchStream-title {
     font-weight: 600; }
 
+.too-many-cooks {
+  color: #e6d140;
+  font-family: Georgia, serif;
+  font-size: 2em;
+  font-style: normal;
+  font-variant: small-caps;
+  display: inline-block;
+  transform: skew(-5deg, 0deg);
+  text-shadow: 1px 1px #000, 1px 1px 0.1px #000; }
+  .too-many-cooks a {
+    color: #e6d140; }
+
 .loader {
   height: 4px;
   width: 100%;

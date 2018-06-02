@@ -21,7 +21,6 @@ button.link {
     border: none;
     background-color: transparent;
     padding: 0;
-
     color: $accentPrimary;
 }
 
@@ -78,7 +77,6 @@ figure.quote {
 .overlay {
     background: rgba(0, 0, 0, .6);
     color: white;
-
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     overflow: hidden;
@@ -145,5 +143,20 @@ figure.quote {
 
     .twitchStream-title {
         font-weight: 600;
+    }
+}
+
+.too-many-cooks {
+    color: #e6d140;
+    font-family: Georgia, serif;
+    font-size: 2em;
+    font-style: normal;
+    font-variant: small-caps;
+    display: inline-block;
+    transform: skew(-5deg, 0deg);
+    text-shadow: 1px 1px #000, 1px 1px 0.1px #000;
+
+    a {
+        color: #e6d140;
     }
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+using System;
 
 namespace Vivelin.Home.Data
 {
@@ -20,9 +22,7 @@ namespace Vivelin.Home.Data
             if (migrations.Any())
                 throw new InvalidOperationException("Unable to seed a database with pending migrations");
 
-#if DEBUG
             await Database.ExecuteSqlCommandAsync("DELETE FROM Quotes");
-#endif
 
             var hasQuotes = await Quotes.AnyAsync();
             if (!hasQuotes)
@@ -97,6 +97,18 @@ namespace Vivelin.Home.Data
                 {
                     Text = "Guilliman nods. The nod means shut up. Thiel shuts up.",
                     Citation = "Dan Abnett. <cite>Know No Fear</cite> (Black Library, 2016), 94."
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "We can dance if we want to<br>We can leave your friends behind<br>'Cause your friends don't dance and if they don't dance<br>Well, they're no friends of mine",
+                    Citation = "Men Without Hats, <cite><a href='https://www.youtube.com/watch?v=0QDKLglEP5Y' target='_blank' rel='external'>The Safety Dance</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "It takes a lot to make a stew<br>A pinch of salt and laugher, too<br>A scoop of kids to add the spice<br>A dash of love to make it nice<br>And you've got",
+                    Citation = "<cite class='too-many-cooks'><a href='https://www.youtube.com/watch?v=QrGrOK8oZG8' target='_blank' rel='external'>Too Many Cooks | Adult Swim</a></cite>"
                 });
 
                 await SaveChangesAsync();
