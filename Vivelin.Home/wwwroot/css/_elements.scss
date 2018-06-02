@@ -160,3 +160,23 @@ figure.quote {
         color: #e6d140;
     }
 }
+
+.status {
+    display: block;
+    font-family: Lato, sans-serif;
+    font-size: .8em;
+    padding: .25em .5em;
+}
+
+.status--lastfm {
+    background-color: #b90000;
+    color: white;
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+}

@@ -50,14 +50,11 @@ html {
   color: #212121;
   background-color: white; }
 
-body {
-  margin: 1em; }
-
 :focus {
   box-shadow: 0 0 1px 1px #ea005e;
   outline: 1px solid #ea005e; }
 
-body > header,
+.content,
 body > main,
 body > footer {
   margin: 0 auto;
@@ -79,6 +76,13 @@ a:visited {
 
 a:hover, a:active {
   text-decoration: underline; }
+
+@media (max-width: 992px) {
+  .content,
+  body > main,
+  body > footer {
+    margin-left: 16px;
+    margin-right: 16px; } }
 
 .with.image {
   line-height: 1.5em; }
@@ -196,6 +200,20 @@ figure.quote {
   text-shadow: 1px 1px #000, 1px 1px 0.1px #000; }
   .too-many-cooks a {
     color: #e6d140; }
+
+.status {
+  display: block;
+  font-family: Lato, sans-serif;
+  font-size: .8em;
+  padding: .25em .5em; }
+
+.status--lastfm {
+  background-color: #b90000;
+  color: white; }
+  .status--lastfm a {
+    color: white; }
+  .status--lastfm a:hover {
+    text-decoration: none; }
 
 .loader {
   height: 4px;

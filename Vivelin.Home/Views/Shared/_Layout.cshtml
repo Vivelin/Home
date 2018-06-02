@@ -18,17 +18,20 @@
 </head>
 <body>
     <header>
-        <h1 class="with image">
-            <img class="avatar" src="~/images/avatars/midna.png" alt="" />
-            Vivelin
-        </h1>
+        @await Component.InvokeAsync("Status")
+        <section class="content">
+            <h1 class="with image">
+                <img class="avatar" src="~/images/avatars/midna.png" alt="" />
+                Vivelin
+            </h1>
+        </section>
     </header>
 
-    <main>
+    <main class="content">
         @RenderBody()
     </main>
 
-    <footer>
+    <footer class="content">
         <nav class="footerBar">
             <section>
                 <ul class="icon-list">
