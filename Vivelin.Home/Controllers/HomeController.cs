@@ -18,8 +18,8 @@ namespace Vivelin.Home.Controllers
         public HomeContext Context { get; }
 
         [HttpGet("~/")]
-        public async Task<IActionResult> Index()
-        {            
+        public async Task<IActionResult> Dashboard()
+        {
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.UserId = User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
