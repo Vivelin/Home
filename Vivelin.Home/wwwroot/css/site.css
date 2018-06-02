@@ -208,7 +208,6 @@ figure.quote {
   display: block;
   font-family: Lato, sans-serif;
   font-size: 1rem;
-  padding: .25em .5em;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden; }
