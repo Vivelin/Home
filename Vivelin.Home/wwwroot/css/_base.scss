@@ -42,6 +42,10 @@ body > footer {
     max-width: $width;
 }
 
+main, footer {
+    clear: both;
+}
+
 body > footer {
     margin-top: 4em;
 }

@@ -164,17 +164,16 @@ figure.quote {
 .status {
     display: block;
     font-family: Lato, sans-serif;
-    font-size: .8em;
+    font-size: 1rem;
     padding: .25em .5em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .status--lastfm {
-    background-color: #b90000;
-    color: white;
-
-
     a {
-        color: white;
+        color: currentColor;
     }
 
     a:hover {
@@ -183,8 +182,25 @@ figure.quote {
 }
 
 .lastfmIcon {
-    fill: currentColor;
+    fill: #b90000;
     position: relative;
     top: 6px;
     margin-top: -10px;
+    margin-right: .125em;
+}
+
+header .avatar {
+    float: left;
+    margin-right: .67em;
+    height: 5em;
+}
+
+@media (max-device-width : 480px) {
+    header .avatar {
+        display: none;
+    }
+}
+
+h1 .subtitle {
+    margin-top: -.67em;
 }

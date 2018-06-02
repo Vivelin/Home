@@ -17,14 +17,12 @@
     </environment>
 </head>
 <body>
-    <header>
-        @await Component.InvokeAsync("Status")
-        <section class="content">
-            <h1 class="with image">
-                <img class="avatar" src="~/images/avatars/midna.png" alt="" />
-                Vivelin
-            </h1>
-        </section>
+    <header class="content">
+        <img class="avatar" src="~/images/avatars/midna.png" alt="" />
+        <h1>
+            Vivelin
+            <span class="subtitle">@await Component.InvokeAsync("Status")</span>
+        </h1>
     </header>
 
     <main class="content">
