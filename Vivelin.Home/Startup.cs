@@ -54,6 +54,7 @@ namespace Vivelin.Home
                 options.SaveTokens = true;
             });
 
+            services.AddMemoryCache();
             services.AddMvc();
             services.AddDbContext<HomeContext>(options =>
             {
