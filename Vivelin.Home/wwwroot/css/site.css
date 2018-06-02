@@ -221,6 +221,8 @@ figure.quote {
 
 .lastfmIcon {
   fill: #b90000;
+  width: 24px;
+  height: 24px;
   position: relative;
   top: 6px;
   margin-top: -10px;

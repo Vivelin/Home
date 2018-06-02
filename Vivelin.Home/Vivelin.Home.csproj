@@ -17,6 +17,7 @@
     <None Remove="Scripts\twitch.d.ts" />
     <None Remove="Scripts\TwitchFollows.tsx" />
     <None Remove="Scripts\TwitchStream.tsx" />
+    <None Remove="Scripts\ViewComponents.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,10 +50,11 @@
     <ProjectReference Include="..\Vivelin.AspNetCore.Headers\Vivelin.AspNetCore.Headers.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\TwitchFollows.tsx" />
-    <TypeScriptCompile Include="Scripts\LoadingIndicator.tsx" />
-    <TypeScriptCompile Include="Scripts\RandomElement.tsx" />
+    <TypeScriptCompile Include="Scripts\Components\TwitchFollows.tsx" />
+    <TypeScriptCompile Include="Scripts\Components\LoadingIndicator.tsx" />
+    <TypeScriptCompile Include="Scripts\Components\RandomElement.tsx" />
     <TypeScriptCompile Include="Scripts\Twitch.d.ts" />
-    <TypeScriptCompile Include="Scripts\TwitchStream.tsx" />
+    <TypeScriptCompile Include="Scripts\Components\TwitchStream.tsx" />
+    <TypeScriptCompile Include="Scripts\ViewComponents.ts" />
   </ItemGroup>
 </Project>

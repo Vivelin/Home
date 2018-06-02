@@ -21,7 +21,7 @@
         <img class="avatar" src="~/images/avatars/midna.png" alt="" />
         <h1>
             Vivelin
-            <span class="subtitle">@await Component.InvokeAsync("Status")</span>
+            <span class="subtitle" data-src="status">@await Component.InvokeAsync("Status")</span>
         </h1>
     </header>
 
@@ -64,6 +64,14 @@
         </nav>
     </footer>
 
+    <environment include="Development">
+        <script src="~/lib/jquery.js"></script>
+        <script src="~/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

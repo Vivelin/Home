@@ -40,9 +40,38 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/lib/jquery.js",
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery.min.js",
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/components.js",
+    "inputFiles": [
+      "Scripts/Components/*.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/components.min.js",
+    "inputFiles": [
+      "wwwroot/js/components.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
+  },
+  {
     "outputFileName": "wwwroot/js/site.js",
     "inputFiles": [
-      "Scripts/**/*.js"
+      "Scripts/*.js"
     ]
   },
   {

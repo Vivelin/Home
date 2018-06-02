@@ -33,6 +33,12 @@ namespace Vivelin.Home.Controllers
             return View(viewModel);
         }
 
+        [HttpGet("~/status")]
+        public IActionResult Status()
+        {
+            return ViewComponent("Status");
+        }
+
         public IActionResult Error()
         {
             return View();
