@@ -10,5 +10,5 @@
         })
     }
 
-    $(function () { window.setInterval(reloadViewComponents, 30000) })
+    $(function () { window.setInterval(reloadViewComponents, 5000) })
 }

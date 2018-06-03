@@ -65,7 +65,9 @@ namespace Vivelin.Home.ViewComponents
             {
                 return memoryCache.GetOrCreateAsync("LastfmNowPlaying", async entry =>
                 {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(15);
+                    // "You will not make more than 5 requests per originating IP
+                    // address per second, averaged over a 5 minute period"
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(1);
 
                     var recentTracks = await Client?.User.GetRecentScrobbles(LastfmUserName, count: 1);
                     return recentTracks?.FirstOrDefault(x => x.IsNowPlaying == true);
@@ -84,7 +86,12 @@ namespace Vivelin.Home.ViewComponents
             {
                 return memoryCache.GetOrCreateAsync("SteamStatus", async entry =>
                 {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(15);
+                    // "You are limited to one hundred thousand (100,000) calls to
+                    // the Steam Web API per day. Valve may approve higher daily
+                    // call limits if you adhere to these API Terms of Use."
+                    //
+                    // 100000/day ≈ 69/min ≈ 1.1/s
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(5);
 
                     var response = await SteamUser?.GetPlayerSummaryAsync(SteamId);
                     return response?.Data;
