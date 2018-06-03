@@ -5,7 +5,7 @@
 
 @if (Model.Quote != null)
 {
-    <figure class="quote" id="@Model.Quote.ID">
+    <figure class="quote" data-quote-id="@Model.Quote.Id">
         <blockquote use-commonmark="true">
             @Html.Raw(Model.Quote.Text)
         </blockquote>

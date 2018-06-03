@@ -8,16 +8,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Steam.Models.SteamCommunity;
 using SteamWebAPI2.Interfaces;
+using Vivelin.Home.Data;
 
 namespace Vivelin.Home.ViewComponents
 {
     public class StatusViewComponent : ViewComponent
     {
+        private readonly HomeContext dbContext;
         private readonly IMemoryCache memoryCache;
         private readonly ILogger logger;
 
-        public StatusViewComponent(IConfiguration configuration, IMemoryCache memoryCache, ILoggerFactory loggerFactory)
+        public StatusViewComponent(HomeContext dbContext, IConfiguration configuration, IMemoryCache memoryCache, ILoggerFactory loggerFactory)
         {
+            this.dbContext = dbContext;
             this.memoryCache = memoryCache;
             this.logger = loggerFactory.CreateLogger<StatusViewComponent>();
 
@@ -52,7 +55,8 @@ namespace Vivelin.Home.ViewComponents
             if (track != null)
                 return View("Lastfm", track);
 
-            return View();
+            var tagline = dbContext.Taglines.Sample();
+            return View(tagline);
         }
 
         private Task<IF.Lastfm.Core.Objects.LastTrack> GetNowPlayingAsync()
