@@ -160,3 +160,48 @@ figure.quote {
         color: #e6d140;
     }
 }
+
+.status {
+    display: block;
+    font-family: Lato, sans-serif;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.status--lastfm {
+    a {
+        color: currentColor;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+.lastfmIcon {
+    fill: #b90000;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    top: 6px;
+    margin-top: -10px;
+    margin-right: .125em;
+}
+
+header .avatar {
+    float: left;
+    margin-right: .67em;
+    height: 5em;
+}
+
+@media (max-device-width : 480px) {
+    header .avatar {
+        display: none;
+    }
+}
+
+h1 .subtitle {
+    margin-top: -.67em;
+}

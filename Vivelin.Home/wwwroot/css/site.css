@@ -50,18 +50,18 @@ html {
   color: #212121;
   background-color: white; }
 
-body {
-  margin: 1em; }
-
 :focus {
   box-shadow: 0 0 1px 1px #ea005e;
   outline: 1px solid #ea005e; }
 
-body > header,
+.content,
 body > main,
 body > footer {
   margin: 0 auto;
   max-width: 960px; }
+
+main, footer {
+  clear: both; }
 
 body > footer {
   margin-top: 4em; }
@@ -79,6 +79,13 @@ a:visited {
 
 a:hover, a:active {
   text-decoration: underline; }
+
+@media (max-width: 992px) {
+  .content,
+  body > main,
+  body > footer {
+    margin-left: 16px;
+    margin-right: 16px; } }
 
 .with.image {
   line-height: 1.5em; }
@@ -196,6 +203,41 @@ figure.quote {
   text-shadow: 1px 1px #000, 1px 1px 0.1px #000; }
   .too-many-cooks a {
     color: #e6d140; }
+
+.status {
+  display: block;
+  font-family: Lato, sans-serif;
+  font-size: 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+
+.status--lastfm a {
+  color: currentColor; }
+
+.status--lastfm a:hover {
+  text-decoration: none; }
+
+.lastfmIcon {
+  fill: #b90000;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 6px;
+  margin-top: -10px;
+  margin-right: .125em; }
+
+header .avatar {
+  float: left;
+  margin-right: .67em;
+  height: 5em; }
+
+@media (max-device-width: 480px) {
+  header .avatar {
+    display: none; } }
+
+h1 .subtitle {
+  margin-top: -.67em; }
 
 .loader {
   height: 4px;

@@ -2,6 +2,8 @@
 $foreground: #212121;
 $accentPrimary: #ea005e;
 $accentSecondary: #8fc045;
+$width: 960px;
+$bodyMargin: 16px;
 
 /*
     // Night mode
@@ -28,20 +30,20 @@ html {
     background-color: $background;
 }
 
-body {
-    margin: 1em;
-}
-
 :focus {
     box-shadow: 0 0 1px 1px $accentPrimary;
     outline: 1px solid $accentPrimary;
 }
 
-body > header,
+.content,
 body > main,
 body > footer {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: $width;
+}
+
+main, footer {
+    clear: both;
 }
 
 body > footer {
@@ -64,4 +66,13 @@ a:visited {
 
 a:hover, a:active {
     text-decoration: underline;
+}
+
+@media (max-width : $width + 2 * $bodyMargin) {
+    .content,
+    body > main,
+    body > footer {
+        margin-left: $bodyMargin;
+        margin-right: $bodyMargin;
+    }
 }

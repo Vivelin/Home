@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Vivelin.Home.Data
 {
-    public class Quote
+    public class Tagline
     {
         public int Id { get; set; }
+
         public string Text { get; set; }
-        public string Citation { get; set; }
     }
 }

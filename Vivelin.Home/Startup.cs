@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +55,7 @@ namespace Vivelin.Home
                 options.SaveTokens = true;
             });
 
+            services.AddMemoryCache();
             services.AddMvc();
             services.AddDbContext<HomeContext>(options =>
             {

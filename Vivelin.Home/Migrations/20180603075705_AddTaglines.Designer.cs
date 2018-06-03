@@ -10,9 +10,10 @@ using Vivelin.Home.Data;
 namespace Vivelin.Home.Migrations
 {
     [DbContext(typeof(HomeContext))]
-    partial class HomeContextModelSnapshot : ModelSnapshot
+    [Migration("20180603075705_AddTaglines")]
+    partial class AddTaglines
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

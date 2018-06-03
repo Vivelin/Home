@@ -3,8 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-using System;
-
 namespace Vivelin.Home.Data
 {
     public class HomeContext : DbContext
@@ -16,6 +14,8 @@ namespace Vivelin.Home.Data
 
         public DbSet<Quote> Quotes { get; set; }
 
+        public DbSet<Tagline> Taglines { get; set; }
+
         public async Task SeedAsync()
         {
             var migrations = await Database.GetPendingMigrationsAsync();
@@ -23,6 +23,7 @@ namespace Vivelin.Home.Data
                 throw new InvalidOperationException("Unable to seed a database with pending migrations");
 
             await Database.ExecuteSqlCommandAsync("DELETE FROM Quotes");
+            await Database.ExecuteSqlCommandAsync("DELETE FROM Taglines");
 
             var hasQuotes = await Quotes.AnyAsync();
             if (!hasQuotes)
@@ -109,6 +110,17 @@ namespace Vivelin.Home.Data
                 {
                     Text = "It takes a lot to make a stew<br>A pinch of salt and laugher, too<br>A scoop of kids to add the spice<br>A dash of love to make it nice<br>And you've got",
                     Citation = "<cite class='too-many-cooks'><a href='https://www.youtube.com/watch?v=QrGrOK8oZG8' target='_blank' rel='external'>Too Many Cooks | Adult Swim</a></cite>"
+                });
+
+                await SaveChangesAsync();
+            }
+
+            var hasTaglines = await Taglines.AnyAsync();
+            if (!hasTaglines)
+            {
+                Taglines.Add(new Tagline
+                {
+                    Text = "Nothing to see here, please move along."
                 });
 
                 await SaveChangesAsync();
