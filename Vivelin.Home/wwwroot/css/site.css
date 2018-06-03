@@ -218,6 +218,11 @@ figure.quote {
 .status--lastfm a:hover {
   text-decoration: none; }
 
+.status--lastfm .albumTitle {
+  opacity: .6;
+  font-weight: 400;
+  font-style: italic; }
+
 .lastfmIcon {
   fill: #b90000;
   width: 24px;
