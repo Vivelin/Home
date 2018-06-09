@@ -38,6 +38,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
     <PackageReference Include="SteamWebAPI2" Version="4.0.8" />
+    <PackageReference Include="Vivelin.AspNetCore.Headers" Version="0.9.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
@@ -46,9 +47,6 @@
   <ItemGroup>
     <Folder Include="Views\Authentication\" />
     <Folder Include="wwwroot\js\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Vivelin.AspNetCore.Headers\Vivelin.AspNetCore.Headers.csproj" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Components\TwitchFollows.tsx" />

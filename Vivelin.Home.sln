@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vivelin.Home", "Vivelin.Home\Vivelin.Home.csproj", "{CAE5D7E5-06CD-4384-8284-0DE2BE4CD419}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vivelin.AspNetCore.Headers", "Vivelin.AspNetCore.Headers\Vivelin.AspNetCore.Headers.csproj", "{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,18 +27,6 @@ Global
 		{CAE5D7E5-06CD-4384-8284-0DE2BE4CD419}.Release|x64.Build.0 = Release|Any CPU
 		{CAE5D7E5-06CD-4384-8284-0DE2BE4CD419}.Release|x86.ActiveCfg = Release|Any CPU
 		{CAE5D7E5-06CD-4384-8284-0DE2BE4CD419}.Release|x86.Build.0 = Release|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Debug|x64.Build.0 = Debug|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Debug|x86.Build.0 = Debug|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Release|x64.ActiveCfg = Release|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Release|x64.Build.0 = Release|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Release|x86.ActiveCfg = Release|Any CPU
-		{1EA75D69-3FB9-4D27-BD26-59FA12F6AFCD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
