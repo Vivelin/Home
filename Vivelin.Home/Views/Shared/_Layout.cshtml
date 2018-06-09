@@ -21,7 +21,7 @@
         <img class="avatar" src="~/images/avatars/midna.png" alt="" />
         <h1>
             Vivelin
-            <span class="subtitle" data-src="status">@await Component.InvokeAsync("Status")</span>
+            <span class="subtitle" data-src="status">@await Component.InvokeAsync("Status", new { cacheOnly = true })</span>
         </h1>
     </header>
 

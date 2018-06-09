@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using IF.Lastfm.Core.Api;
+using IF.Lastfm.Core.Objects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
@@ -45,13 +46,13 @@ namespace Vivelin.Home.ViewComponents
 
         protected SteamUser SteamUser { get; }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(bool cacheOnly = false)
         {
-            var steamStatus = await GetSteamStatusAsync();
+            var steamStatus = await GetSteamStatusAsync(cacheOnly);
             if (steamStatus?.PlayingGameName != null)
                 return View("Steam", steamStatus);
 
-            var track = await GetNowPlayingAsync();
+            var track = await GetNowPlayingAsync(cacheOnly);
             if (track != null)
                 return View("Lastfm", track);
 
@@ -59,11 +60,16 @@ namespace Vivelin.Home.ViewComponents
             return View(tagline);
         }
 
-        private Task<IF.Lastfm.Core.Objects.LastTrack> GetNowPlayingAsync()
+        private async Task<LastTrack> GetNowPlayingAsync(bool cacheOnly = false)
         {
+            const string cacheKey = "LastfmNowPlaying";
+
             try
             {
-                return memoryCache.GetOrCreateAsync("LastfmNowPlaying", async entry =>
+                if (cacheOnly)
+                    return memoryCache.Get<LastTrack>(cacheKey);
+
+                return await memoryCache.GetOrCreateAsync(cacheKey, async entry =>
                 {
                     // "You will not make more than 5 requests per originating IP
                     // address per second, averaged over a 5 minute period"
@@ -80,11 +86,14 @@ namespace Vivelin.Home.ViewComponents
             }
         }
 
-        private Task<PlayerSummaryModel> GetSteamStatusAsync()
+        private async Task<PlayerSummaryModel> GetSteamStatusAsync(bool cacheOnly = false)
         {
+            const string cacheKey = "SteamStatus";
             try
             {
-                return memoryCache.GetOrCreateAsync("SteamStatus", async entry =>
+                if (cacheOnly) return memoryCache.Get<PlayerSummaryModel>(cacheKey);
+
+                return await memoryCache.GetOrCreateAsync(cacheKey, async entry =>
                 {
                     // "You are limited to one hundred thousand (100,000) calls to
                     // the Steam Web API per day. Valve may approve higher daily
