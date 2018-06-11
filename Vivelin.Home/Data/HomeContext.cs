@@ -112,6 +112,30 @@ namespace Vivelin.Home.Data
                     Citation = "<cite class='too-many-cooks'><a href='https://www.youtube.com/watch?v=QrGrOK8oZG8' target='_blank' rel='external'>Too Many Cooks | Adult Swim</a></cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "So, we’re starting with a game that we announced a few weeks ago through our friends at Walmart Canada… perhaps best known for their low prices and ability to keep a secret.",
+                    Citation = "Pete Hines at the <cite><a href='https://youtu.be/OxGorVTMDIU?t=5295' target='_blank' rel='external'>2018 Bethesda E3 Showcase</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>E3 has become such an incredible week of entertainment, but we know that most of you came here for one thing.</q><br><q>TODD HOWARD!</q>",
+                    Citation = "Todd Howard and a random guy in the audience at the <cite><a href='https://youtu.be/oOceqR-rtLo?t=4392' target='_blank' rel='external'>2018 Bethesda E3 Showcase</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "…because evidently, these online games are hard; they can have some nasty issues… I read on the internet that our games have had a few bugs.",
+                    Citation = "Todd Howard at the <cite><a href='https://youtu.be/OxGorVTMDIU?t=9159' target='_blank' rel='external'>2018 Bethesda E3 Showcase</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "…and that sometimes, it doesn’t <i>just work</i>.",
+                    Citation = "Todd Howard at the <cite><a href='https://youtu.be/OxGorVTMDIU?t=9174' target='_blank' rel='external'>2018 Bethesda E3 Showcase</a></cite>"
+                });
+
                 await SaveChangesAsync();
             }
 
