@@ -19,7 +19,7 @@ body {
   font-family: Merriweather, 'Sitka Text', 'Palatino Linotype', serif;
   font-size: 1.2rem; }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .twitchStream {
   font-family: Lato, sans-serif; }
 
 h1 {
