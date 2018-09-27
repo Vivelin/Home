@@ -21,7 +21,7 @@ button.link {
     border: none;
     background-color: transparent;
     padding: 0;
-    color: $accentPrimary;
+    color: $primary;
 }
 
 button.link:hover,
@@ -57,7 +57,7 @@ ul.icon-list {
     width: $footerBarHeight;
     height: $footerBarHeight;
     vertical-align: bottom;
-    background-color: $accentPrimary;
+    background-color: $primary;
 }
 
 figure.quote {

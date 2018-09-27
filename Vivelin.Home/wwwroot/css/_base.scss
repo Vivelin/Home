@@ -1,7 +1,7 @@
 ﻿$background: white;
 $foreground: #212121;
-$accentPrimary: #ea005e;
-$accentSecondary: #8fc045;
+$primary: #ea005e;
+$secondary: #8fc045;
 $width: 960px;
 $bodyMargin: 16px;
 
@@ -10,8 +10,8 @@ $bodyMargin: 16px;
 
     $background: #212121;
     $foreground: #fafafa;
-    $accentPrimary: #8fc045;
-    $accentSecondary: #ea005e;
+    $primary: #8fc045;
+    $secondary: #ea005e;
 */
 
 /*
@@ -19,8 +19,8 @@ $bodyMargin: 16px;
 
     $background: #9bbc0f;
     $foreground: #0f380f;
-    $accentPrimary: #306230;
-    $accentSecondary: #306230;
+    $primary: #306230;
+    $secondary: #306230;
 */
 
 @import 'typography';
@@ -31,8 +31,8 @@ html {
 }
 
 :focus {
-    box-shadow: 0 0 1px 1px $accentPrimary;
-    outline: 1px solid $accentPrimary;
+    box-shadow: 0 0 1px 1px $primary;
+    outline: 1px solid $primary;
 }
 
 .content,
@@ -56,12 +56,12 @@ hr {
 }
 
 a {
-    color: $accentPrimary;
+    color: $primary;
     text-decoration: none;
 }
 
 a:visited {
-    color: desaturate($accentPrimary, 33%);
+    color: desaturate($primary, 33%);
 }
 
 a:hover, a:active {

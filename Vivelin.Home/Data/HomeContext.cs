@@ -136,6 +136,48 @@ namespace Vivelin.Home.Data
                     Citation = "Todd Howard at the <cite><a href='https://youtu.be/OxGorVTMDIU?t=9174' target='_blank' rel='external'>2018 Bethesda E3 Showcase</a></cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "Guys, the thermal drill! Go get it!",
+                    Citation = "Bain in <cite><a href='https://youtu.be/vsW2sYiChCo' target='_blank' rel='external'>PAYDAY 2</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "Do you get to the Cloud District very often? Oh, what am I saying—of course you don’t.",
+                    Citation = "Nazeem in <cite><a href='https://youtu.be/Im8lQFEwShg' target='_blank' rel='external'>The Elder Scrolls V: Skyrim</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "I work with my mother, to sell fruits and vegetables. It’s fun most days, but hard work.",
+                    Citation = "Mila Valentia in <cite><a href='https://youtu.be/ogcrW1Uns5s?t=30' target='_blank' rel='external'>The Elder Scrolls V: Skyrim</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "This rose has thorns, and here they are!",
+                    Citation = "Female sylvari with <i>retaliation</i> in <cite><a href='https://youtu.be/V74blbz5Ywc' target='_blank' rel='external'>Guild Wars 2</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "I could outrun a centaur!",
+                    Citation = "Female human with <i>swiftness</i> in <cite><a href='https://youtu.be/XNVSXIRcN5U' target='_blank' rel='external'>Guild Wars 2</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "You’re dumb, you’ll die, and you’ll leave a dumb corpse.",
+                    Citation = "Female asura in <cite>Guild Wars 2</cite>"
+                });
+                
+                Quotes.Add(new Quote
+                {
+                    Text = "Just one more confirmation of how <em>great</em> I am.",
+                    Citation = "Female human getting an achievement in <cite>Guild Wars 2</cite>"
+                });
+
                 await SaveChangesAsync();
             }
 

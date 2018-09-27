@@ -4,16 +4,16 @@
 
     $background: #212121;
     $foreground: #fafafa;
-    $accentPrimary: #8fc045;
-    $accentSecondary: #ea005e;
+    $primary: #8fc045;
+    $secondary: #ea005e;
 */
 /*
     // Game Boy mode
 
     $background: #9bbc0f;
     $foreground: #0f380f;
-    $accentPrimary: #306230;
-    $accentSecondary: #306230;
+    $primary: #306230;
+    $secondary: #306230;
 */
 body {
   font-family: Merriweather, 'Sitka Text', 'Palatino Linotype', serif;
@@ -45,6 +45,10 @@ figcaption {
 
 footer {
   font-size: .8em; }
+
+ins {
+  font-style: italic;
+  text-decoration: none; }
 
 html {
   color: #212121;
