@@ -178,6 +178,18 @@ namespace Vivelin.Home.Data
                     Citation = "Female human getting an achievement in <cite>Guild Wars 2</cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "Honestly, if you could see just what was going on outside your realm of perception, it would blow your minds! That's the main reason I kept it back. If I were to give you an analogy, I'd describe it like this: when a duck swims on the water, you only see it glide, apparently effortlessly across the lake. But underneath, as in beneath the surface, it's a whole different story. Its legs are moving like he's pedaling a fucking bicycle up a mountain! Well, that's me right now. <strong>I am that duck!</strong>",
+                    Citation = "Dr. Monty in Revelations, <cite><a href='https://youtu.be/MhmWCWaTucY' target='_blank' rel='external'>Call of Duty: Black Ops III</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "This, uh, next band asked me not to read this but goddamn it, I'm going to read it anyway, because I wrote it, and it's the truth. I fucking love this band! They are the best band ever, period! Ladies and gentlemen, Tenacious D!",
+                    Citation = "<cite><a href='https://youtu.be/80DtQD5BQ_A' target='_blank' rel='external'>Tenacious D: The Pick of Destiny — Master Exploder</a></cite>"
+                });
+
                 await SaveChangesAsync();
             }
 
