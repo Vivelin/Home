@@ -117,9 +117,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
 
         if (this.state.pendingRequests === 0 && this.state.streams.length == 0) {
             return <RandomElement>
-                <p>Nobody you’re following on Twitch is currently live.</p>
-                <p className='with image'>Maybe there’s something on <a href='https://www.youtube.com/feed/subscriptions/activity' rel='external'>YouTube</a>? <img src='https://static-cdn.jtvnw.net/emoticons/v1/904875/3.0' alt='rooShrug' /></p>
-                <p className='with image'><img src='https://static-cdn.jtvnw.net/emoticons/v1/904819/3.0' alt='rooBlank' /></p>
+                <p>This space intentionally left blank.</p>
             </RandomElement>
         }
 

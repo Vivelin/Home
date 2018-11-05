@@ -190,6 +190,12 @@ namespace Vivelin.Home.Data
                     Citation = "<cite><a href='https://youtu.be/80DtQD5BQ_A' target='_blank' rel='external'>Tenacious D: The Pick of Destiny — Master Exploder</a></cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "That’s what friends are for. Friendliest friends that ever friended. And they friended all the way to friendsville in their friend-mobile. Just friends forever!",
+                    Citation = "Auralnauts, <cite><a href='https://youtu.be/gI8aSJBC9u0?t=735' target='_blank' rel='external'>STAR WARS EP 2: The Friend Zone</a></cite>"
+                });
+
                 await SaveChangesAsync();
             }
 
