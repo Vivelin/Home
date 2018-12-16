@@ -59,10 +59,10 @@ class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch
     private description() {
         const viewerCount = this.props.stream.viewer_count
         if (viewerCount === 0)
-            return this.uptime() + ' alone'
+            return this.uptime() + ' · no viewers'
         if (viewerCount === 1)
-            return this.uptime() + ' for a lone soul'
-        return this.uptime() + ' with ' + viewerCount.toLocaleString() + ' viewers';
+            return this.uptime() + ' · 1 viewer'
+        return this.uptime() + ' · ' + viewerCount.toLocaleString() + ' viewers';
     }
 
     private uptime() {
@@ -79,15 +79,15 @@ class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch
         }
         else if (elapsedMs < 1.5 * hours) {
             const elapsedMinutes = elapsedMs / minutes
-            return Math.round(elapsedMinutes) + 'm'
+            return Math.round(elapsedMinutes) + ' minutes'
         }
         else if (elapsedMs < 1.5 * days) {
             const elapsedHours = elapsedMs / hours
-            return Math.round(elapsedHours) + 'h'
+            return Math.round(elapsedHours) + ' hours'
         }
         else {
             const elapsedDays = elapsedMs / days;
-            return '~' + Math.round(elapsedDays) + 'd'
+            return Math.round(elapsedDays) + ' days'
         }
     }
 }
