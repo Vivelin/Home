@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using IF.Lastfm.Core.Api;
 using IF.Lastfm.Core.Objects;
@@ -10,11 +12,13 @@ using Microsoft.Extensions.Logging;
 using Steam.Models.SteamCommunity;
 using SteamWebAPI2.Interfaces;
 using Vivelin.Home.Data;
+using Vivelin.Home.Twitch;
 
 namespace Vivelin.Home.ViewComponents
 {
     public class StatusViewComponent : ViewComponent
     {
+        private static readonly HttpClient httpClient = new HttpClient();
         private readonly HomeContext dbContext;
         private readonly IMemoryCache memoryCache;
         private readonly ILogger logger;
@@ -27,6 +31,8 @@ namespace Vivelin.Home.ViewComponents
 
             LastfmUserName = configuration["LastfmUser"];
             SteamId = configuration.GetValue<ulong>("SteamID");
+            TwitchUserId = configuration.GetValue<ulong>("TwitchUserId");
+            TwitchClientId = configuration["TwitchClientId"];
 
             var lastfmApiKey = configuration["LastfmApiKey"];
             var lastfmSecret = configuration["LastfmSharedSecret"];
@@ -42,12 +48,20 @@ namespace Vivelin.Home.ViewComponents
 
         protected ulong SteamId { get; }
 
+        protected ulong TwitchUserId { get; }
+
+        protected string TwitchClientId { get; }
+
         protected LastfmClient Client { get; }
 
         protected SteamUser SteamUser { get; }
 
         public async Task<IViewComponentResult> InvokeAsync(bool cacheOnly = false)
         {
+            var streamStatus = await GetStreamAsync(cacheOnly);
+            if (streamStatus != null)
+                return View("Twitch", streamStatus);
+
             var steamStatus = await GetSteamStatusAsync(cacheOnly);
             if (steamStatus?.PlayingGameName != null)
                 return View("Steam", steamStatus);
@@ -58,6 +72,43 @@ namespace Vivelin.Home.ViewComponents
 
             var tagline = dbContext.Taglines.Sample();
             return View(tagline);
+        }
+
+        private async Task<TwitchStream> GetStreamAsync(bool cacheOnly = false)
+        {
+            const string cacheKey = "TwitchStream";
+
+            try
+            {
+                if (cacheOnly)
+                    return memoryCache.Get<TwitchStream>(cacheKey);
+
+                return await memoryCache.GetOrCreateAsync(cacheKey, async entry =>
+                {
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(5);
+
+                    var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.twitch.tv/kraken/streams/{TwitchUserId}?stream_type=live");
+                    request.Headers.Accept.Clear();
+                    request.Headers.Accept.ParseAdd("application/vnd.twitchtv.v5+json");
+                    request.Headers.Add("Client-ID", TwitchClientId);
+
+                    var response = await httpClient.SendAsync(request);
+                    var content = await response.Content.ReadAsStringAsync();
+                    var twitchResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<TwitchStreamResponse>(content);
+                    twitchResponse?.ThrowOnError();
+                    return twitchResponse?.Stream;
+                });
+            }
+            catch (TwitchException ex)
+            {
+                logger.LogError("There was a problem getting the current stream status from Twitch. {0}", ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("There was a problem getting the current stream status from Twitch. Details: {0}", ex);
+                return null;
+            }
         }
 
         private async Task<LastTrack> GetNowPlayingAsync(bool cacheOnly = false)

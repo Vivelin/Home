@@ -1,0 +1,13 @@
+﻿@model Vivelin.Home.Twitch.TwitchStream
+
+<span class="status status--twitch">
+    <img src="~/images/icons/glitch.svg" class="glitchIcon" alt="" />
+    @if (Model.Viewers > 1)
+    {
+        <a href="@Model.Channel.Url" target="_blank" rel="external">Streaming @Model.Game for @Model.Viewers.ToString("N0") viewers <span class="streamTitle">@Model.Channel.Status</span></a>
+    }
+    else
+    {
+        <a href="@Model.Channel.Url" target="_blank" rel="external">Streaming @Model.Game <span class="streamTitle">@Model.Channel.Status</span></a>
+    }
+</span>

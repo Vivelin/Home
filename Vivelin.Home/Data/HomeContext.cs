@@ -121,7 +121,7 @@ namespace Vivelin.Home.Data
                 Quotes.Add(new Quote
                 {
                     Text = "<q>E3 has become such an incredible week of entertainment, but we know that most of you came here for one thing.</q><br><q>TODD HOWARD!</q>",
-                    Citation = "Todd Howard and a random guy in the audience at the <cite><a href='https://youtu.be/oOceqR-rtLo?t=4392' target='_blank' rel='external'>2018 Bethesda E3 Showcase</a></cite>"
+                    Citation = "Todd Howard and someone in the audience at the <cite><a href='https://youtu.be/oOceqR-rtLo?t=4392' target='_blank' rel='external'>2018 Bethesda E3 Showcase</a></cite>"
                 });
 
                 Quotes.Add(new Quote

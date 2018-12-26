@@ -168,9 +168,7 @@ figure.quote {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-}
 
-.status--lastfm {
     a {
         color: currentColor;
     }
@@ -178,8 +176,18 @@ figure.quote {
     a:hover {
         text-decoration: none;
     }
+}
 
+.status--lastfm {
     .albumTitle {
+        opacity: .6;
+        font-weight: 400;
+        font-style: italic;
+    }
+}
+
+.status--twitch {
+    .streamTitle {
         opacity: .6;
         font-weight: 400;
         font-style: italic;
@@ -193,6 +201,15 @@ figure.quote {
     position: relative;
     top: 6px;
     margin-top: -10px;
+    margin-right: .125em;
+}
+
+.glitchIcon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 4px;
+    margin-top: -4px;
     margin-right: .125em;
 }
 
