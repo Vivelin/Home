@@ -171,7 +171,7 @@ namespace Vivelin.Home.Data
                     Text = "You’re dumb, you’ll die, and you’ll leave a dumb corpse.",
                     Citation = "Female asura in <cite>Guild Wars 2</cite>"
                 });
-                
+
                 Quotes.Add(new Quote
                 {
                     Text = "Just one more confirmation of how <em>great</em> I am.",
@@ -194,6 +194,17 @@ namespace Vivelin.Home.Data
                 {
                     Text = "That’s what friends are for. Friendliest friends that ever friended. And they friended all the way to friendsville in their friend-mobile. Just friends forever!",
                     Citation = "Auralnauts, <cite><a href='https://youtu.be/gI8aSJBC9u0?t=735' target='_blank' rel='external'>STAR WARS EP 2: The Friend Zone</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<dl class='dialog'><dt>Gunnery Chief</dt><dd>This, recruits, is a 20-kilo ferrous slug. Feel the weight. Every five seconds, the main gun of an Everest-class dreadnought accelerates one to 1.3 percent of light speed. It impacts with the force of a 38-kiloton bomb. That is three times the yield of the city buster dropped on Hiroshima back on Earth. That means Sir Isaac Newton is the deadliest son-of-a-bitch in space. Now! Serviceman Burnside! What is Newton's First Law?</dd>" +
+                    "<dt>First Recruit</dt><dd>Sir! An object in motion stays in motion, sir!</dd>" +
+                    "<dt>Gunnery Chief</dt><dd>No credit for partial answers, maggot!</dd>" +
+                    "<dt>First Recruit</dt><dd>Sir! Unless acted on by an outside force, sir!</dd>" +
+                    "<dt>Gunnery Chief</dt><dd>Damn straight! I dare to assume you ignorant jackasses know that space is empty. Once you fire this husk of metal, it keeps going till it hits something. That can be a ship, or the planet behind that ship. It might go off into deep space and hit somebody else in ten thousand years. If you pull the trigger on this, you're ruining someone's day, somewhere and sometime. That is why you check your damn targets! That is why you wait for the computer to give you a damn firing solution! That is why, Serviceman Chung, we do not <q>eyeball it!</q> This is a weapon of mass destruction. You are not a cowboy shooting from the hip!</dd>" +
+                    "<dt>Second Recruit</dt><dd>Sir, yes sir!</dd></dl>",
+                    Citation = "Gunnery Chief and two recruits in the Citadel in <cite><a href='https://youtu.be/p77XnhzJz7g' target='_blank' rel='external'>Mass Effect 2</a></cite>"
                 });
 
                 await SaveChangesAsync();

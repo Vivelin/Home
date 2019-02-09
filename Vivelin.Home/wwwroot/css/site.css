@@ -145,6 +145,33 @@ figure.quote {
   figure.quote figcaption:before {
     content: '—'; }
 
+dl.dialog dt {
+  display: inline;
+  font-weight: 600; }
+
+dl.dialog dt:before {
+  content: '';
+  display: block;
+  margin-top: 1em; }
+
+dl.dialog dt:after {
+  content: ': '; }
+
+dl.dialog dd {
+  display: inline;
+  margin: 0;
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+  dl.dialog dd q {
+    display: inline;
+    margin: 0;
+    quotes: "\2018" "\2019" "\201C" "\201D"; }
+
+dl.dialog dd:before {
+  content: open-quote; }
+
+dl.dialog dd:after {
+  content: close-quote; }
+
 .overlay {
   background: rgba(0, 0, 0, 0.6);
   color: white;
