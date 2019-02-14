@@ -140,6 +140,7 @@ dl.dialog {
     margin-right: $spacing;
     margin-bottom: $spacing;
     overflow: hidden;
+    line-height: 1.25;
 
     .twitchStream-thumbnail {
         width: $width;

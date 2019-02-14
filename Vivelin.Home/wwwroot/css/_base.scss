@@ -42,6 +42,11 @@ body > footer {
     max-width: $width;
 }
 
+header {
+    // Ensure title + status align properly with avatar
+    line-height: 1.2;
+}
+
 main, footer {
     clear: both;
 }
