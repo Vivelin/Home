@@ -49,7 +49,6 @@ namespace Vivelin.Home
             {
                 options.LoginPath = "/login";
                 options.LogoutPath = "/logout";
-                options.ExpireTimeSpan = TimeSpan.FromHours(1);
                 options.Events = services.BuildServiceProvider().GetRequiredService<TwitchAuthenticationEvents>();
             })
             .AddTwitch(options =>
