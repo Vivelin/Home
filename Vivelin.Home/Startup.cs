@@ -38,6 +38,9 @@ namespace Vivelin.Home
         // to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new TwitchTokenClient(Configuration["TwitchClientId"], Configuration["TwitchClientSecret"]));
+            services.AddSingleton<TwitchAuthenticationEvents>();
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -47,6 +50,7 @@ namespace Vivelin.Home
                 options.LoginPath = "/login";
                 options.LogoutPath = "/logout";
                 options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                options.Events = services.BuildServiceProvider().GetRequiredService<TwitchAuthenticationEvents>();
             })
             .AddTwitch(options =>
             {

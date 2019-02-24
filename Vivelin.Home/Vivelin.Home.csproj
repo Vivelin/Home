@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNet.Security.OAuth.Twitch" Version="2.0.0-rc2-final" />
+    <PackageReference Include="AspNet.Security.OAuth.Twitch" Version="2.0.1" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="Inflatable.Lastfm" Version="1.0.1.307" />

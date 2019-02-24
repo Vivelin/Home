@@ -48,9 +48,15 @@
             <section>
                 @if (User.Identity.IsAuthenticated)
                 {
+                    var name = User.FindFirst(AspNet.Security.OAuth.Twitch.TwitchAuthenticationConstants.Claims.DisplayName)?.Value;
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        name = User.Identity.Name;
+                    }
+
                     <form action="/logout" method="post">
                         <input type="hidden" name="returnUrl" value="/" />
-                        <p>Not @User.Identity.Name? <button class="link" type="submit">Log out</button></p>
+                        <p>Not @name? <button class="link" type="submit">Log out</button></p>
                     </form>
                 }
                 else
