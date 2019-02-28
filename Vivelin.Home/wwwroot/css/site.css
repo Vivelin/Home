@@ -111,7 +111,8 @@ button.link {
   border: none;
   background-color: transparent;
   padding: 0;
-  color: #ea005e; }
+  color: #ea005e;
+  font-weight: inherit; }
 
 button.link:hover,
 button.link:active {
@@ -123,6 +124,13 @@ button.link:active {
 .footerBar section {
   margin-right: .5rem;
   line-height: 32px; }
+
+.userName.loggedIn {
+  font-weight: 600; }
+  .userName.loggedIn small {
+    color: #595959;
+    font-weight: 400;
+    font-size: 1rem; }
 
 ul.icon-list {
   list-style-type: none;

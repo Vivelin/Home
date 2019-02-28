@@ -32,20 +32,6 @@
     <footer class="content">
         <nav class="footerBar">
             <section>
-                <ul class="icon-list">
-                    <li>
-                        <a class="website icon" href="https://twitter.com/VivelinPrime" rel="external">
-                            <img src="~/images/icons/twitter.png" alt="@@VivelinPrime on Twitter" />
-                        </a>
-                    </li>
-                    <li>
-                        <a class="website icon" href="https://github.com/Vivelin" rel="external">
-                            <img src="~/images/icons/github.png" alt="Vivelin on GitHub" />
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <section>
                 @if (User.Identity.IsAuthenticated)
                 {
                     var name = User.FindFirst(AspNet.Security.OAuth.Twitch.TwitchAuthenticationConstants.Claims.DisplayName)?.Value;
@@ -56,7 +42,7 @@
 
                     <form action="/logout" method="post">
                         <input type="hidden" name="returnUrl" value="/" />
-                        <p>Not @name? <button class="link" type="submit">Log out</button></p>
+                        <p class="userName loggedIn">Hey, @name! <small>Not you? <button class="link" type="submit">Log out</button></small></p>
                     </form>
                 }
                 else
