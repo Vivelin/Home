@@ -207,6 +207,12 @@ namespace Vivelin.Home.Data
                     Citation = "Gunnery Chief and two recruits in the Citadel in <cite><a href='https://youtu.be/p77XnhzJz7g' target='_blank' rel='external'>Mass Effect 2</a></cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>Oh, I'm very spiritual, you know. I can see auras. But I only use that for healing and helping people. I'm like a wisewoman, you know? I give people insight and advice.</q><br><q>Look, just because I say crazy things, that doesn't mean I believe everything.</q>",
+                    Citation = "Alan Wake in <cite>Alan Wake's American Nightmare</cite>"
+                });
+
                 await SaveChangesAsync();
             }
 
