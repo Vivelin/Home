@@ -26,14 +26,27 @@ $bodyMargin: 16px;
 
 @import 'typography';
 
+:root {
+    --background-color: $background;
+    --foreground-color: $foreground;
+    --foreground-color-muted: $foregroundMuted;
+    --primary-color: $primary;
+    --primary-color-muted: desaturate($primary, 33%);
+    --secondary-color: $secondary;
+}
+
 html {
     color: $foreground;
+    color: var(--foreground-color);
     background-color: $background;
+    background-color: var(--background-color);
 }
 
 :focus {
     box-shadow: 0 0 1px 1px $primary;
+    box-shadow: 0 0 1px 1px var(--primary-color);
     outline: 1px solid $primary;
+    outline: 1px solid var(--primary-color);
 }
 
 .content,
@@ -63,11 +76,13 @@ hr {
 
 a {
     color: $primary;
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 a:visited {
     color: desaturate($primary, 33%);
+    color: var(--primary-color-muted);
 }
 
 a:hover, a:active {
@@ -80,5 +95,16 @@ a:hover, a:active {
     body > footer {
         margin-left: $bodyMargin;
         margin-right: $bodyMargin;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #000000;
+        --foreground-color: #BABABA;
+        --foreground-color-muted: #969696;
+        --primary-color: $primary;
+        --primary-color-muted: desaturate($primary, 33%);
+        --secondary-color: $secondary;
     }
 }

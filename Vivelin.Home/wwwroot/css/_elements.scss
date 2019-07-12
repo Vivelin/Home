@@ -11,9 +11,11 @@ $footerBarHeight: 32px;
 }
 
 .avatar {
-    border: 1px solid black;
+    border: 1px solid $foreground;
+    border: 1px solid var(--foreground-color);
     border-radius: 2px;
-    box-shadow: 0 0 2px black;
+    box-shadow: 0 0 2px $foreground;
+    box-shadow: 0 0 2px var(--foreground-color);
 }
 
 /* For buttons that behave like hyperlinks (e.g. POST form action that triggers a redirect) */
@@ -22,6 +24,7 @@ button.link {
     background-color: transparent;
     padding: 0;
     color: $primary;
+    color: var(--primary-color);
     font-weight: inherit;
 }
 
@@ -44,6 +47,7 @@ button.link:active {
 
     small {
         color: $foregroundMuted;
+        color: var(--foreground-color-muted);
         font-weight: 400;
         font-size: 1rem;
     }
@@ -69,6 +73,7 @@ ul.icon-list {
     height: $footerBarHeight;
     vertical-align: bottom;
     background-color: $primary;
+    background-color: var(--primary-color);
 }
 
 figure.quote {

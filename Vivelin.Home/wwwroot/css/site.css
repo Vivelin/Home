@@ -51,13 +51,25 @@ ins {
   font-style: italic;
   text-decoration: none; }
 
+:root {
+  --background-color: white;
+  --foreground-color: #212121;
+  --foreground-color-muted: #595959;
+  --primary-color: #ea005e;
+  --primary-color-muted: #c32766;
+  --secondary-color: #8fc045; }
+
 html {
   color: #212121;
-  background-color: white; }
+  color: var(--foreground-color);
+  background-color: white;
+  background-color: var(--background-color); }
 
 :focus {
   box-shadow: 0 0 1px 1px #ea005e;
-  outline: 1px solid #ea005e; }
+  box-shadow: 0 0 1px 1px var(--primary-color);
+  outline: 1px solid #ea005e;
+  outline: 1px solid var(--primary-color); }
 
 .content,
 body > main,
@@ -80,10 +92,12 @@ hr {
 
 a {
   color: #ea005e;
+  color: var(--primary-color);
   text-decoration: none; }
 
 a:visited {
-  color: #c32766; }
+  color: #c32766;
+  color: var(--primary-color-muted); }
 
 a:hover, a:active {
   text-decoration: underline; }
@@ -95,6 +109,15 @@ a:hover, a:active {
     margin-left: 16px;
     margin-right: 16px; } }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #000000;
+    --foreground-color: #BABABA;
+    --foreground-color-muted: #969696;
+    --primary-color: #ea005e;
+    --primary-color-muted: #c32766;
+    --secondary-color: #8fc045; } }
+
 .with.image {
   line-height: 1.5em; }
   .with.image img {
@@ -102,9 +125,11 @@ a:hover, a:active {
     vertical-align: bottom; }
 
 .avatar {
-  border: 1px solid black;
+  border: 1px solid #212121;
+  border: 1px solid var(--foreground-color);
   border-radius: 2px;
-  box-shadow: 0 0 2px black; }
+  box-shadow: 0 0 2px #212121;
+  box-shadow: 0 0 2px var(--foreground-color); }
 
 /* For buttons that behave like hyperlinks (e.g. POST form action that triggers a redirect) */
 button.link {
@@ -112,6 +137,7 @@ button.link {
   background-color: transparent;
   padding: 0;
   color: #ea005e;
+  color: var(--primary-color);
   font-weight: inherit; }
 
 button.link:hover,
@@ -129,6 +155,7 @@ button.link:active {
   font-weight: 600; }
   .userName.loggedIn small {
     color: #595959;
+    color: var(--foreground-color-muted);
     font-weight: 400;
     font-size: 1rem; }
 
@@ -146,7 +173,8 @@ ul.icon-list {
   width: 32px;
   height: 32px;
   vertical-align: bottom;
-  background-color: #ea005e; }
+  background-color: #ea005e;
+  background-color: var(--primary-color); }
 
 figure.quote {
   margin-left: 1em;
