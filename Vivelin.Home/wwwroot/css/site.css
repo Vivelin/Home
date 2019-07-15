@@ -112,7 +112,7 @@ a:hover, a:active {
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #000000;
-    --foreground-color: #BABABA;
+    --foreground-color: #DEDEDE;
     --foreground-color-muted: #969696;
     --primary-color: #ea005e;
     --primary-color-muted: #c32766;
