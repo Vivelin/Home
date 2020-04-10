@@ -213,6 +213,12 @@ namespace Vivelin.Home.Data
                     Citation = "Alan Wake in <cite>Alan Wake's American Nightmare</cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "<q>You aren’t going to win this. I swear it.</q>",
+                    Citation = "Yadira Ban in Flashpoint: The Black Talon, <cite>Star Wars: The Old Republic</cite>"
+                });
+
                 await SaveChangesAsync();
             }
 

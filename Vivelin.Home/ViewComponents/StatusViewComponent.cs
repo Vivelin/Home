@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Steam.Models.SteamCommunity;
 using SteamWebAPI2.Interfaces;
+using SteamWebAPI2.Utilities;
 using Vivelin.Home.Data;
 using Vivelin.Home.Twitch;
 
@@ -18,16 +19,16 @@ namespace Vivelin.Home.ViewComponents
 {
     public class StatusViewComponent : ViewComponent
     {
-        private static readonly HttpClient httpClient = new HttpClient();
-        private readonly HomeContext dbContext;
-        private readonly IMemoryCache memoryCache;
-        private readonly ILogger logger;
+        private static readonly HttpClient s_httpClient = new HttpClient();
+        private readonly HomeContext _dbContext;
+        private readonly IMemoryCache _memoryCache;
+        private readonly ILogger _logger;
 
         public StatusViewComponent(HomeContext dbContext, IConfiguration configuration, IMemoryCache memoryCache, ILoggerFactory loggerFactory)
         {
-            this.dbContext = dbContext;
-            this.memoryCache = memoryCache;
-            this.logger = loggerFactory.CreateLogger<StatusViewComponent>();
+            _dbContext = dbContext;
+            _memoryCache = memoryCache;
+            _logger = loggerFactory.CreateLogger<StatusViewComponent>();
 
             LastfmUserName = configuration["LastfmUser"];
             SteamId = configuration.GetValue<ulong>("SteamID");
@@ -37,11 +38,11 @@ namespace Vivelin.Home.ViewComponents
             var lastfmApiKey = configuration["LastfmApiKey"];
             var lastfmSecret = configuration["LastfmSharedSecret"];
             if (lastfmApiKey != null && lastfmSecret != null)
-                Client = new LastfmClient(lastfmApiKey, lastfmSecret);
+                Client = new LastfmClient(lastfmApiKey, lastfmSecret, s_httpClient);
 
             var steamWebApiKey = configuration["SteamWebApiKey"];
             if (steamWebApiKey != null)
-                SteamUser = new SteamUser(steamWebApiKey);
+                SteamFactory = new SteamWebInterfaceFactory(steamWebApiKey);
         }
 
         protected string LastfmUserName { get; }
@@ -54,7 +55,7 @@ namespace Vivelin.Home.ViewComponents
 
         protected LastfmClient Client { get; }
 
-        protected SteamUser SteamUser { get; }
+        protected SteamWebInterfaceFactory SteamFactory { get; }
 
         public async Task<IViewComponentResult> InvokeAsync(bool cacheOnly = false)
         {
@@ -70,20 +71,20 @@ namespace Vivelin.Home.ViewComponents
             if (track != null)
                 return View("Lastfm", track);
 
-            var tagline = dbContext.Taglines.Sample();
+            var tagline = _dbContext.Taglines.Sample();
             return View(tagline);
         }
 
         private async Task<TwitchStream> GetStreamAsync(bool cacheOnly = false)
         {
-            const string cacheKey = "TwitchStream";
+            const string CacheKey = "TwitchStream";
 
             try
             {
                 if (cacheOnly)
-                    return memoryCache.Get<TwitchStream>(cacheKey);
+                    return _memoryCache.Get<TwitchStream>(CacheKey);
 
-                return await memoryCache.GetOrCreateAsync(cacheKey, async entry =>
+                return await _memoryCache.GetOrCreateAsync(CacheKey, async entry =>
                 {
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(5);
 
@@ -92,7 +93,7 @@ namespace Vivelin.Home.ViewComponents
                     request.Headers.Accept.ParseAdd("application/vnd.twitchtv.v5+json");
                     request.Headers.Add("Client-ID", TwitchClientId);
 
-                    var response = await httpClient.SendAsync(request);
+                    var response = await s_httpClient.SendAsync(request);
                     var content = await response.Content.ReadAsStringAsync();
                     var twitchResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<TwitchStreamResponse>(content);
                     twitchResponse?.ThrowOnError();
@@ -101,50 +102,56 @@ namespace Vivelin.Home.ViewComponents
             }
             catch (TwitchException ex)
             {
-                logger.LogError("There was a problem getting the current stream status from Twitch. {0}", ex.Message);
+                _logger.LogError("There was a problem getting the current stream status from Twitch. {0}", ex.Message);
                 return null;
             }
             catch (Exception ex)
             {
-                logger.LogError("There was a problem getting the current stream status from Twitch. Details: {0}", ex);
+                _logger.LogError("There was a problem getting the current stream status from Twitch. Details: {0}", ex);
                 return null;
             }
         }
 
         private async Task<LastTrack> GetNowPlayingAsync(bool cacheOnly = false)
         {
-            const string cacheKey = "LastfmNowPlaying";
+            if (Client == null)
+                return null;
+
+            const string CacheKey = "LastfmNowPlaying";
 
             try
             {
                 if (cacheOnly)
-                    return memoryCache.Get<LastTrack>(cacheKey);
+                    return _memoryCache.Get<LastTrack>(CacheKey);
 
-                return await memoryCache.GetOrCreateAsync(cacheKey, async entry =>
+                return await _memoryCache.GetOrCreateAsync(CacheKey, async entry =>
                 {
                     // "You will not make more than 5 requests per originating IP
                     // address per second, averaged over a 5 minute period"
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(1);
 
-                    var recentTracks = await Client?.User.GetRecentScrobbles(LastfmUserName, count: 1);
+                    var recentTracks = await Client.User.GetRecentScrobbles(LastfmUserName, count: 1);
                     return recentTracks?.FirstOrDefault(x => x.IsNowPlaying == true);
                 });
             }
             catch (Exception ex)
             {
-                logger.LogError("There was a problem getting the currently playing track from Last.fm. Details: {0}", ex);
+                _logger.LogError("There was a problem getting the currently playing track from Last.fm. Details: {0}", ex);
                 return null;
             }
         }
 
         private async Task<PlayerSummaryModel> GetSteamStatusAsync(bool cacheOnly = false)
         {
-            const string cacheKey = "SteamStatus";
+            if (SteamFactory == null)
+                return null;
+
+            const string CacheKey = "SteamStatus";
             try
             {
-                if (cacheOnly) return memoryCache.Get<PlayerSummaryModel>(cacheKey);
+                if (cacheOnly) return _memoryCache.Get<PlayerSummaryModel>(CacheKey);
 
-                return await memoryCache.GetOrCreateAsync(cacheKey, async entry =>
+                return await _memoryCache.GetOrCreateAsync(CacheKey, async entry =>
                 {
                     // "You are limited to one hundred thousand (100,000) calls to
                     // the Steam Web API per day. Valve may approve higher daily
@@ -153,13 +160,14 @@ namespace Vivelin.Home.ViewComponents
                     // 100000/day ≈ 69/min ≈ 1.1/s
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(5);
 
-                    var response = await SteamUser?.GetPlayerSummaryAsync(SteamId);
+                    var steamUser = SteamFactory.CreateSteamWebInterface<SteamUser>(s_httpClient);
+                    var response = await steamUser.GetPlayerSummaryAsync(SteamId);
                     return response?.Data;
                 });
             }
             catch (Exception ex)
             {
-                logger.LogError("There was a problem getting the status from Steam. Details: {0}", ex);
+                _logger.LogError("There was a problem getting the status from Steam. Details: {0}", ex);
                 return null;
             }
         }
