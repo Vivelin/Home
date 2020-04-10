@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
     <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
   </PropertyGroup>
 
@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Authentication\" />
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Components\TwitchFollows.tsx" />
