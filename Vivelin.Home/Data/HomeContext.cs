@@ -215,8 +215,14 @@ namespace Vivelin.Home.Data
 
                 Quotes.Add(new Quote
                 {
-                    Text = "<q>You aren’t going to win this. I swear it.</q>",
+                    Text = "You aren’t going to win this. I swear it.",
                     Citation = "Yadira Ban in Flashpoint: The Black Talon, <cite>Star Wars: The Old Republic</cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<p>You could add Nori to this. You could not put Nori in it. It doesn’t matter, we’re all gonna die.</p><p>So we have our rice here…</p>",
+                    Citation = "Bon Appétit’s Andy in <cite><a href='https://youtu.be/JWg6ckxRwvE?t=180' target='_blank' rel='external'>Andy Makes Confetti Rice with Chicken | Bon Appétit</a></cite>"
                 });
 
                 await SaveChangesAsync();

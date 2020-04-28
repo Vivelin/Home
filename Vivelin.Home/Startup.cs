@@ -65,6 +65,7 @@ namespace Vivelin.Home
                 options.UseSqlite(Configuration.GetConnectionString("HomeContext"));
             });
 
+            services.AddSingleton(Configuration);
             services.AddSingleton<IConfiguration>(Configuration);
         }
 

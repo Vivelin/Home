@@ -13,6 +13,11 @@ interface TwitchFollowsProps {
     accessToken: string
 
     /**
+     * The Twitch Client ID used to generate the access token.
+     */
+    clientId: string
+
+    /**
      * The number of seconds between each reload of the Twitch API data.
      */
     reloadInterval: number
@@ -191,6 +196,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
 
         request.open('GET', 'https://api.twitch.tv/helix/' + relativeUri)
         request.setRequestHeader('Authorization', 'Bearer ' + this.props.accessToken)
+        request.setRequestHeader('Client-ID', this.props.clientId)
 
         this.setState((prevState) => ({ pendingRequests: prevState.pendingRequests + 1 }));
         request.send()
@@ -211,7 +217,8 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     const container = document.getElementById('twitch-follows')
     if (container) {
         const userId = container.dataset.userId
+        const clientId = container.dataset.clientId
         const accessToken = container.dataset.accessToken
-        ReactDOM.render(<TwitchFollows reloadInterval={30000} userId={userId} accessToken={accessToken} />, container)
+        ReactDOM.render(<TwitchFollows reloadInterval={30000} userId={userId} clientId={clientId} accessToken={accessToken} />, container)
     }
 }
