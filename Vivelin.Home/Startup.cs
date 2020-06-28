@@ -108,6 +108,7 @@ namespace Vivelin.Home
                             .AllowFromOrigin("https://fonts.googleapis.com");
                         csp.Fonts
                             .AllowFromSelf()
+                            .AllowFromScheme("data:")
                             .AllowFromOrigin("https://fonts.gstatic.com");
                         csp.Fetch
                             .AllowFromSelf()
