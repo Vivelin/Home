@@ -133,6 +133,9 @@ a:hover, a:active {
 
 /* For buttons that behave like hyperlinks (e.g. POST form action that triggers a redirect) */
 button.link {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
   background-color: transparent;
   padding: 0;
@@ -229,8 +232,7 @@ dl.dialog dd:after {
 .twitchStream {
   width: 315px;
   height: 177.1875px;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  margin: 0 5px 5px 0;
   overflow: hidden;
   line-height: 1.2; }
   .twitchStream .twitchStream-thumbnail {

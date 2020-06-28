@@ -2,284 +2,286 @@
 $footerBarHeight: 32px;
 
 .with.image {
-    line-height: $largeImage;
+  line-height: $largeImage;
 
-    img {
-        height: $largeImage;
-        vertical-align: bottom;
-    }
+  img {
+    height: $largeImage;
+    vertical-align: bottom;
+  }
 }
 
 .avatar {
-    border: 1px solid $foreground;
-    border: 1px solid var(--foreground-color);
-    border-radius: 2px;
-    box-shadow: 0 0 2px $foreground;
-    box-shadow: 0 0 2px var(--foreground-color);
+  border: 1px solid $foreground;
+  border: 1px solid var(--foreground-color);
+  border-radius: 2px;
+  box-shadow: 0 0 2px $foreground;
+  box-shadow: 0 0 2px var(--foreground-color);
 }
 
 /* For buttons that behave like hyperlinks (e.g. POST form action that triggers a redirect) */
 button.link {
-    border: none;
-    background-color: transparent;
-    padding: 0;
-    color: $primary;
-    color: var(--primary-color);
-    font-weight: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  color: $primary;
+  color: var(--primary-color);
+  font-weight: inherit;
 }
 
 button.link:hover,
 button.link:active {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .footerBar {
-    display: flex;
+  display: flex;
 }
 
 .footerBar section {
-    margin-right: .5rem;
-    line-height: $footerBarHeight;
+  margin-right: .5rem;
+  line-height: $footerBarHeight;
 }
 
 .userName.loggedIn {
-    font-weight: 600;
+  font-weight: 600;
 
-    small {
-        color: $foregroundMuted;
-        color: var(--foreground-color-muted);
-        font-weight: 400;
-        font-size: 1rem;
-    }
+  small {
+    color: $foregroundMuted;
+    color: var(--foreground-color-muted);
+    font-weight: 400;
+    font-size: 1rem;
+  }
 }
 
 ul.icon-list {
-    list-style-type: none;
-    padding-left: 0;
-    overflow: hidden;
+  list-style-type: none;
+  padding-left: 0;
+  overflow: hidden;
 
-    li {
-        float: left;
-        margin-right: .5em;
-    }
+  li {
+    float: left;
+    margin-right: .5em;
+  }
 
-    li:last-child {
-        margin-right: 0;
-    }
+  li:last-child {
+    margin-right: 0;
+  }
 }
 
 .website.icon img {
-    width: $footerBarHeight;
-    height: $footerBarHeight;
-    vertical-align: bottom;
-    background-color: $primary;
-    background-color: var(--primary-color);
+  width: $footerBarHeight;
+  height: $footerBarHeight;
+  vertical-align: bottom;
+  background-color: $primary;
+  background-color: var(--primary-color);
 }
 
 figure.quote {
-    margin-left: 1em;
-    margin-right: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
 
-    blockquote {
-        margin-left: 0;
-        margin-right: 0;
-    }
+  blockquote {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-    figcaption:before {
-        content: '—';
-    }
+  figcaption:before {
+    content: '—';
+  }
 }
 
 dl.dialog {
-    dt {
-        display: inline;
-        font-weight: 600;
-    }
+  dt {
+    display: inline;
+    font-weight: 600;
+  }
 
-    dt:before {
-        content: '';
-        display: block;
-        margin-top: 1em;
-    }
+  dt:before {
+    content: '';
+    display: block;
+    margin-top: 1em;
+  }
 
-    dt:after {
-        content: ': ';
-    }
+  dt:after {
+    content: ': ';
+  }
 
-    dd {
-        display: inline;
-        margin: 0;
-        quotes: "\201C" "\201D" "\2018" "\2019";
+  dd {
+    display: inline;
+    margin: 0;
+    quotes: "\201C" "\201D" "\2018" "\2019";
 
-        q {
-            display: inline;
-            margin: 0;
-            quotes: "\2018" "\2019" "\201C" "\201D";
-        }
+    q {
+      display: inline;
+      margin: 0;
+      quotes: "\2018" "\2019" "\201C" "\201D";
     }
+  }
 
-    dd:before {
-        content: open-quote;
-    }
+  dd:before {
+    content: open-quote;
+  }
 
-    dd:after {
-        content: close-quote;
-    }
+  dd:after {
+    content: close-quote;
+  }
 }
 
 .overlay {
-    background: rgba(0, 0, 0, .6);
-    color: white;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    overflow: hidden;
+  background: rgba(0, 0, 0, .6);
+  color: white;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
 }
 
 .twitchStreams {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem 0;
 
-    .loader {
-        margin: .5rem 0;
-    }
+  .loader {
+    margin: .5rem 0;
+  }
 }
 
 .twitchStream {
-    $spacing: 5px;
-    $headerSize: 50px;
-    $width: ((960px - (3 * $spacing)) / 3);
-    $height: $width * (9 / 16);
+  $spacing: 5px;
+  $headerSize: 50px;
+  $width: ((960px - (3 * $spacing)) / 3);
+  $height: $width * (9 / 16);
 
+  width: $width;
+  height: $height;
+  margin: 0 $spacing $spacing 0;
+  overflow: hidden;
+  line-height: 1.2;
+
+  .twitchStream-thumbnail {
     width: $width;
     height: $height;
-    margin-right: $spacing;
-    margin-bottom: $spacing;
+  }
+
+  figcaption {
+    height: $headerSize;
+    font-size: .8rem;
+    position: relative;
+    top: -$height;
+    padding: $spacing;
+    margin-top: -5px; /* For some reason, there's an extra ~5px margin on top */
     overflow: hidden;
-    line-height: 1.2;
+  }
 
-    .twitchStream-thumbnail {
-        width: $width;
-        height: $height;
-    }
-
-    figcaption {
-        height: $headerSize;
-        font-size: .8rem;
-        position: relative;
-        top: -$height;
-        padding: $spacing;
-        margin-top: -5px; /* For some reason, there's an extra ~5px margin on top */
-        overflow: hidden;
-    }
-
-    figcaption > a {
-        display: block;
-        height: $headerSize;
-        color: white;
-    }
-
-    .twitchStream-profileImage {
-        width: $headerSize;
-        height: $headerSize;
-        float: left;
-    }
-
-    .twitchStream-title,
-    .twitchStream-description {
-        display: inline-block;
-        width: calc(#{$width} - #{$headerSize} - #{$spacing * 4});
-        margin: $spacing $spacing 0 $spacing;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-
-    .twitchStream-title {
-        font-weight: 600;
-    }
-}
-
-.too-many-cooks {
-    color: #e6d140;
-    font-family: Georgia, serif;
-    font-size: 2em;
-    font-style: normal;
-    font-variant: small-caps;
-    display: inline-block;
-    transform: skew(-5deg, 0deg);
-    text-shadow: 1px 1px #000, 1px 1px 0.1px #000;
-
-    a {
-        color: #e6d140;
-    }
-}
-
-.status {
+  figcaption > a {
     display: block;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
+    height: $headerSize;
+    color: white;
+  }
+
+  .twitchStream-profileImage {
+    width: $headerSize;
+    height: $headerSize;
+    float: left;
+  }
+
+  .twitchStream-title,
+  .twitchStream-description {
+    display: inline-block;
+    width: calc(#{$width} - #{$headerSize} - #{$spacing * 4});
+    margin: $spacing $spacing 0 $spacing;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
 
-    a {
-        color: currentColor;
-    }
+  .twitchStream-title {
+    font-weight: 600;
+  }
+}
 
-    a:hover {
-        text-decoration: none;
-    }
+.too-many-cooks {
+  color: #e6d140;
+  font-family: Georgia, serif;
+  font-size: 2em;
+  font-style: normal;
+  font-variant: small-caps;
+  display: inline-block;
+  transform: skew(-5deg, 0deg);
+  text-shadow: 1px 1px #000, 1px 1px 0.1px #000;
+
+  a {
+    color: #e6d140;
+  }
+}
+
+.status {
+  display: block;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  a {
+    color: currentColor;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 .status--lastfm {
-    .albumTitle {
-        opacity: .6;
-        font-weight: 400;
-        font-style: italic;
-    }
+  .albumTitle {
+    opacity: .6;
+    font-weight: 400;
+    font-style: italic;
+  }
 }
 
 .status--twitch {
-    .streamTitle {
-        opacity: .6;
-        font-weight: 400;
-        font-style: italic;
-    }
+  .streamTitle {
+    opacity: .6;
+    font-weight: 400;
+    font-style: italic;
+  }
 }
 
 .lastfmIcon {
-    fill: #b90000;
-    width: 24px;
-    height: 24px;
-    position: relative;
-    top: 6px;
-    margin-top: -10px;
-    margin-right: .125em;
+  fill: #b90000;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 6px;
+  margin-top: -10px;
+  margin-right: .125em;
 }
 
 .glitchIcon {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    top: 4px;
-    margin-top: -4px;
-    margin-right: .125em;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 4px;
+  margin-top: -4px;
+  margin-right: .125em;
 }
 
 header .avatar {
-    float: left;
-    margin-right: .67em;
-    height: 5em;
+  float: left;
+  margin-right: .67em;
+  height: 5em;
 }
 
 @media (max-device-width : 480px) {
-    header .avatar {
-        display: none;
-    }
+  header .avatar {
+    display: none;
+  }
 }
 
 h1 .subtitle {
-    margin-top: -.67em;
+  margin-top: -.67em;
 }
