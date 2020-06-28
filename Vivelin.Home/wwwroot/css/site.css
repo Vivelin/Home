@@ -16,12 +16,12 @@
     $secondary: #306230;
 */
 body {
-  font-family: Merriweather, 'Sitka Text', 'Palatino Linotype', serif;
+  font-family: Literata, 'Sitka Text', 'Palatino Linotype', serif;
   font-size: 1.2rem;
   line-height: 1.5; }
 
 h1, h2, h3, h4, h5, h6, .twitchStream {
-  font-family: Lato, sans-serif; }
+  font-family: 'IBM Plex Sans', sans-serif; }
 
 h1 {
   font-size: 3em; }
@@ -133,6 +133,9 @@ a:hover, a:active {
 
 /* For buttons that behave like hyperlinks (e.g. POST form action that triggers a redirect) */
 button.link {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
   background-color: transparent;
   padding: 0;
@@ -229,8 +232,7 @@ dl.dialog dd:after {
 .twitchStream {
   width: 315px;
   height: 177.1875px;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  margin: 0 5px 5px 0;
   overflow: hidden;
   line-height: 1.2; }
   .twitchStream .twitchStream-thumbnail {
@@ -278,8 +280,9 @@ dl.dialog dd:after {
 
 .status {
   display: block;
-  font-family: Lato, sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 1rem;
+  font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden; }
