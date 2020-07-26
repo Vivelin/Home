@@ -221,8 +221,9 @@ namespace Vivelin.Home.Data
 
                 Quotes.Add(new Quote
                 {
-                    Text = "<p>You could add Nori to this. You could not put Nori in it. It doesn’t matter, we’re all gonna die.</p><p>So we have our rice here…</p>",
-                    Citation = "Bon Appétit’s Andy in <cite><a href='https://youtu.be/JWg6ckxRwvE?t=180' target='_blank' rel='external'>Andy Makes Confetti Rice with Chicken | Bon Appétit</a></cite>"
+                    Text = "<p>You just never quit, do you?" +
+                        "<p>Took out Ghaul. Woke up the Traveler. And now half of what I hear on the streets is how much you and your clan are making a difference.",
+                    Citation = "Suraya Hawthorne in <cite><a href='https://youtu.be/qY30_hCQZOI' target='_blank' rel='external'>Destiny 2</a></cite>"
                 });
 
                 await SaveChangesAsync();
