@@ -235,6 +235,19 @@ namespace Vivelin.Home.Data
                     Citation = "Rob Cantor, <cite><a href='https://youtu.be/o0u4M6vppCI' target='_blank' rel='external'>\"Shia LaBeouf\" Live</a></cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "Baby I’m in the zone<br>" +
+                    "Like a king without a throne<br>" +
+                    "I’d rather have you by my side<br>" +
+                    "Than play the skin trombone<br>" +
+                    "I thought that what we had was real<br>" +
+                    "But I couldn’t close the deal<br>" +
+                    "I’m a piece of shit, cause baby<br>" +
+                    "Baby I’m in the zone",
+                    Citation = "Auralnauts, <cite><a href='https://youtu.be/6DD45wBDLNs' target='_blank' rel='external'>In the Zone</a></cite>"
+                });
+
                 await SaveChangesAsync();
             }
 
