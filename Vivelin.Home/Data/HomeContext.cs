@@ -226,6 +226,15 @@ namespace Vivelin.Home.Data
                     Citation = "Suraya Hawthorne in <cite><a href='https://youtu.be/qY30_hCQZOI' target='_blank' rel='external'>Destiny 2</a></cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "You’re walking in the woods<br>" +
+                    "There’s no one around and your phone is dead<br>" +
+                    "Out of the corner of your eye, you spot him<br>" +
+                    "<i>Shia LaBeouf</i>",
+                    Citation = "Rob Cantor, <cite><a href='https://youtu.be/o0u4M6vppCI' target='_blank' rel='external'>\"Shia LaBeouf\" Live</a></cite>"
+                });
+
                 await SaveChangesAsync();
             }
 
