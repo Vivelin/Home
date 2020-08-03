@@ -228,6 +228,19 @@ namespace Vivelin.Home.Data
 
                 Quotes.Add(new Quote
                 {
+                    Text = "Actual cannibal Shia LaBeouf",
+                    Citation = "Rob Cantor, <cite><a href='https://youtu.be/o0u4M6vppCI' target='_blank' rel='external'>\"Shia LaBeouf\" Live</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "Legendary fight with Shia LaBeouf<br>" +
+                    "Normal Tuesday night for Shia LaBeouf<br>",
+                    Citation = "Rob Cantor, <cite><a href='https://youtu.be/o0u4M6vppCI' target='_blank' rel='external'>\"Shia LaBeouf\" Live</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
                     Text = "You’re walking in the woods<br>" +
                     "There’s no one around and your phone is dead<br>" +
                     "Out of the corner of your eye, you spot him<br>" +
