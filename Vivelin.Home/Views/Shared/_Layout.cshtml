@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Vivelin.net</title>
 
+    <link rel="shortcut icon" href="~/favicon.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Literata:ital,wght@0,400;0,600;0,700;1,400&display=swap">
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/normalize-css/normalize.css" />
@@ -18,7 +19,7 @@
 </head>
 <body>
     <header class="content">
-        <img class="avatar" src="~/images/avatars/94097.png" alt="" />
+        <img class="avatar" src="~/images/avatars/april.png" alt="" />
         <h1>
             Vivelin
             <span class="subtitle" data-src="status">@await Component.InvokeAsync("Status", new { cacheOnly = true })</span>

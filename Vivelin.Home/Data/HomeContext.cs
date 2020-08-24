@@ -250,6 +250,15 @@ namespace Vivelin.Home.Data
 
                 Quotes.Add(new Quote
                 {
+                    Text = "Wait! He isn’t dead! Shia surprise!<br>" +
+                    "There’s a gun to your head, and death in his eyes<br>" +
+                    "But you can do Jiu Jitsu<br>" +
+                    "Body slam superstar Shia LaBeouf",
+                    Citation = "Rob Cantor, <cite><a href='https://youtu.be/o0u4M6vppCI' target='_blank' rel='external'>\"Shia LaBeouf\" Live</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
                     Text = "Baby I’m in the zone<br>" +
                     "Like a king without a throne<br>" +
                     "I’d rather have you by my side<br>" +
@@ -259,6 +268,25 @@ namespace Vivelin.Home.Data
                     "I’m a piece of shit, cause baby<br>" +
                     "Baby I’m in the zone",
                     Citation = "Auralnauts, <cite><a href='https://youtu.be/6DD45wBDLNs' target='_blank' rel='external'>In the Zone</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "Let me tell ya something...<br>" +
+                    "Sleepin’ makes me feel good!<br>" +
+                    "<i>[snoring]</i><br>" +
+                    "I ain’t afraid of no sleep!<br>" +
+                    "I ain’t afraid of no bed!<br><br>" +
+                    "An invisible bed...<br>" +
+                    "A freaky ghost bed!<br>" +
+                    "Yeah! Yeah! Yeah! Yeah! Yeah! Yeah!",
+                    Citation = "Neil Cicierega, <cite><a href='https://youtu.be/0tdyU_gW6WE' target='_blank' rel='external'>Bustin</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN BUSTIN Bustin’ makes me feel good!",
+                    Citation = "Neil Cicierega, <cite><a href='https://youtu.be/0tdyU_gW6WE' target='_blank' rel='external'>Bustin</a></cite>"
                 });
 
                 await SaveChangesAsync();
