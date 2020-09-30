@@ -155,7 +155,7 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
     }
 
     private loadStreams(response: Twitch.Response<Twitch.Follow>) {
-        if (response.data.length == 0) {
+        if (response.data.length === 0) {
             return
         }
 
@@ -173,14 +173,14 @@ class TwitchFollows extends React.Component<TwitchFollowsProps, TwitchFollowsSta
             }))
         })
 
-        if (response.pagination) {
+        if (response.pagination && response.pagination.cursor) {
             this.sendRequest<Twitch.Follow>('users/follows?from_id=' + this.props.userId + '&after=' + response.pagination.cursor, response => this.loadStreams(response))
         }
     }
 
     private sendRequest<T>(relativeUri: string, successCallback: (data: Twitch.Response<T>) => void) {
-        var request = new XMLHttpRequest()
-        request.onload = e => {
+        const request = new XMLHttpRequest()
+        request.onload = () => {
             this.setState((prevState) => ({ pendingRequests: prevState.pendingRequests - 1 }))
 
             const response = JSON.parse(request.responseText) as Twitch.Response<T>
