@@ -3,7 +3,6 @@ $foreground: #212121;
 $foregroundMuted: #595959;
 $foregroundIntense: #000;
 $primary: #ea005e;
-$secondary: #8fc045;
 $width: 960px;
 $bodyMargin: 16px;
 
@@ -34,7 +33,6 @@ $bodyMargin: 16px;
   --foreground-color-intense: $foregroundIntense;
   --primary-color: $primary;
   --primary-color-muted: desaturate($primary, 33%);
-  --secondary-color: $secondary;
 }
 
 html {
@@ -106,8 +104,7 @@ a:hover, a:active {
     --foreground-color: #dedede;
     --foreground-color-muted: #969696;
     --foreground-color-intense: #FFF;
-    --primary-color: $primary;
-    --primary-color-muted: desaturate($primary, 33%);
-    --secondary-color: $secondary;
+    --primary-color: #8fc045;
+    --primary-color-muted: #668a2f;
   }
 }
