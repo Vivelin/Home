@@ -1,6 +1,7 @@
 ﻿$background: white;
 $foreground: #212121;
 $foregroundMuted: #595959;
+$foregroundIntense: #000;
 $primary: #ea005e;
 $secondary: #8fc045;
 $width: 960px;
@@ -27,84 +28,86 @@ $bodyMargin: 16px;
 @import 'typography';
 
 :root {
-    --background-color: $background;
-    --foreground-color: $foreground;
-    --foreground-color-muted: $foregroundMuted;
-    --primary-color: $primary;
-    --primary-color-muted: desaturate($primary, 33%);
-    --secondary-color: $secondary;
+  --background-color: $background;
+  --foreground-color: $foreground;
+  --foreground-color-muted: $foregroundMuted;
+  --foreground-color-intense: $foregroundIntense;
+  --primary-color: $primary;
+  --primary-color-muted: desaturate($primary, 33%);
+  --secondary-color: $secondary;
 }
 
 html {
-    color: $foreground;
-    color: var(--foreground-color);
-    background-color: $background;
-    background-color: var(--background-color);
+  color: $foreground;
+  color: var(--foreground-color);
+  background-color: $background;
+  background-color: var(--background-color);
 }
 
 :focus {
-    box-shadow: 0 0 1px 1px $primary;
-    box-shadow: 0 0 1px 1px var(--primary-color);
-    outline: 1px solid $primary;
-    outline: 1px solid var(--primary-color);
+  box-shadow: 0 0 1px 1px $primary;
+  box-shadow: 0 0 1px 1px var(--primary-color);
+  outline: 1px solid $primary;
+  outline: 1px solid var(--primary-color);
 }
 
 .content,
 body > main,
 body > footer {
-    margin: 0 auto;
-    max-width: $width;
+  margin: 0 auto;
+  max-width: $width;
 }
 
 header {
-    // Ensure title + status align properly with avatar
-    line-height: 1.2;
+  // Ensure title + status align properly with avatar
+  line-height: 1.2;
 }
 
 main, footer {
-    clear: both;
+  clear: both;
 }
 
 body > footer {
-    margin-top: 4em;
+  margin-top: 4em;
 }
 
 hr {
-    border: none;
-    border-top: 1px solid rgba($foreground, .2);
+  border: none;
+  border-top: 1px solid rgba($foreground, .2);
 }
 
 a {
-    color: $primary;
-    color: var(--primary-color);
-    text-decoration: none;
+  color: $primary;
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 a:visited {
-    color: desaturate($primary, 33%);
-    color: var(--primary-color-muted);
+  color: desaturate($primary, 33%);
+  color: var(--primary-color-muted);
 }
 
 a:hover, a:active {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 @media (max-width : $width + 2 * $bodyMargin) {
-    .content,
-    body > main,
-    body > footer {
-        margin-left: $bodyMargin;
-        margin-right: $bodyMargin;
-    }
+  .content,
+  body > main,
+  body > footer {
+    margin-left: $bodyMargin;
+    margin-right: $bodyMargin;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --background-color: #000000;
-        --foreground-color: #DEDEDE;
-        --foreground-color-muted: #969696;
-        --primary-color: $primary;
-        --primary-color-muted: desaturate($primary, 33%);
-        --secondary-color: $secondary;
-    }
+  :root {
+    --background-color: #18181f;
+    --foreground-color: #dedede;
+    --foreground-color-muted: #969696;
+    --foreground-color-intense: #FFF;
+    --primary-color: $primary;
+    --primary-color-muted: desaturate($primary, 33%);
+    --secondary-color: $secondary;
+  }
 }

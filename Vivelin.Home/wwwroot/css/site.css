@@ -21,6 +21,7 @@ body {
   line-height: 1.5; }
 
 h1, h2, h3, h4, h5, h6, .twitchStream {
+  color: var(--foreground-color-intense);
   font-family: 'IBM Plex Sans', sans-serif; }
 
 h1 {
@@ -55,6 +56,7 @@ ins {
   --background-color: white;
   --foreground-color: #212121;
   --foreground-color-muted: #595959;
+  --foreground-color-intense: #000;
   --primary-color: #ea005e;
   --primary-color-muted: #c32766;
   --secondary-color: #8fc045; }
@@ -111,9 +113,10 @@ a:hover, a:active {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #000000;
-    --foreground-color: #DEDEDE;
+    --background-color: #18181f;
+    --foreground-color: #dedede;
     --foreground-color-muted: #969696;
+    --foreground-color-intense: #FFF;
     --primary-color: #ea005e;
     --primary-color-muted: #c32766;
     --secondary-color: #8fc045; } }
