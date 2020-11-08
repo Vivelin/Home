@@ -1,34 +1,42 @@
 ﻿.loader {
-    height: 4px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    background-color: rgba($foreground, .03);
-    border-radius: 2px;
+  height: 4px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, .03);
+  border-radius: 2px;
 }
 
 .loader[hidden] {
-    display: block;
-    visibility: hidden;
+  display: block;
+  visibility: hidden;
 }
 
 .loader:before {
-    display: block;
-    position: absolute;
-    content: "";
-    left: -200px;
-    width: 200px;
-    height: 4px;
-    background-color: $primary;
-    animation: ltr 2s ease-in-out infinite;
+  display: block;
+  position: absolute;
+  content: "";
+  left: -200px;
+  width: 200px;
+  height: 4px;
+  background-color: $primary;
+  background-color: var(--primary-color);
+  animation: ltr 2s ease-in-out infinite;
 }
 
 @keyframes ltr {
-    from {
-        left: -200px;
-    }
+  from {
+    left: -200px;
+  }
 
-    to {
-        left: 100%;
-    }
+  to {
+    left: 100%;
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .loader {
+    background-color: rgba(0, 0, 0, .2);
+  }
 }
