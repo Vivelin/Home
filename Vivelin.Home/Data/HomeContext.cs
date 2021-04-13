@@ -300,6 +300,35 @@ namespace Vivelin.Home.Data
                     Citation = "Bad Lip Reading, <cite><a href='https://youtu.be/U9t-slLl30E' target='_blank' rel='external'>SEAGULLS! (Stop It Now)</a></cite>"
                 });
 
+                Quotes.Add(new Quote
+                {
+                    Text = "Come on, let me in! Aria’s expecting me! Ugh.",
+                    Citation = "<cite><a href='https://youtu.be/wXVkcTC16rw' target='_blank' rel='external'>Mass Effect 2</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "<dl class='dialog'><dt>Annoyed Human</dt><dd>Look. I’ll pay you. I’m prepared to offer you 50 credits.</dd>"
+                         + "<dt>Bouncer</dt><dd>With apparent interest: Double it.</dd>"
+                         + "<dt>Annoyed Human</dt><dd>Okay. 100 credits!</dd>"
+                         + "<dt>Bouncer</dt><dd>Amused: Double it.</dd>"
+                         + "<dt>Annoyed Human</dt><dd>Er... 200 credits?</dd>"
+                         + "<dt>Bouncer</dt><dd>Assertively: No. Get back in line.</dd></dl>",
+                    Citation = "<cite><a href='https://youtu.be/wXVkcTC16rw' target='_blank' rel='external'>Mass Effect 2</a></cite>"
+                });
+
+                Quotes.Add(new Quote
+                {
+                    Text = "You don't have a grenade launcher, lady. Get lost.",
+                    Citation = "<cite><a href='https://youtu.be/GfjjRFAPod4' target='_blank' rel='external'>Mass Effect 2</a></cite>"
+                });
+                
+                Quotes.Add(new Quote
+                {
+                    Text = "I’m escaping to the <em>one</em> place that hasn’t been corrupted by capitalism... <strong>space</strong>!",
+                    Citation = "<cite><a href='https://youtu.be/g1Sq1Nr58hM' target='_blank' rel='external'>Command & Conquer: Red Alert 3 (Allied campaign)</a></cite>"
+                });
+
                 await SaveChangesAsync();
             }
 
