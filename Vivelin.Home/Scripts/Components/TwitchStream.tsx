@@ -37,7 +37,7 @@ class TwitchStream extends React.Component<{ stream: Twitch.Stream, user: Twitch
         }
 
         const streamUrl = 'https://www.twitch.tv/' + this.props.user.login
-        const thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360') + '#' + Date.now()
+        const thumbnailUrl = this.props.stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360') + '?t=' + Date.now()
 
         return (
             <figure className='twitchStream'>
